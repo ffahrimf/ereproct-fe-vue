@@ -7,7 +7,7 @@ export const mainStore = defineStore("main", {
   state: (): State => ({
     mode: import.meta.env.MODE,
     token: useDecrypt(Cookies.get("hAS-aTH")),
-    role: useDecrypt(Cookies.get("as-hris")),
+    role: useDecrypt(Cookies.get("as-bermentor")),
     guid: useDecrypt(Cookies.get("glbl-unq-hr")),
     manager: useDecrypt(Cookies.get("aprvl-ln")),
     id_table: null,
@@ -26,7 +26,7 @@ export const mainStore = defineStore("main", {
     splash: true,
     coords: {
       lat: "",
-      lng: "",
+      lng: ""
     },
     isMobile: false,
     badge: {
@@ -37,11 +37,11 @@ export const mainStore = defineStore("main", {
       employee_leave_proposal: 0,
       employee_overtime_proposal: 0,
       employee_loan_proposal: 0,
-      vacancy_request: 0,
-    },
+      vacancy_request: 0
+    }
   }),
   getters: {
     isAuthenticated: (state: State): boolean =>
-      state.token !== null && state.token !== undefined,
-  },
+      state.token !== null && state.token !== undefined
+  }
 });

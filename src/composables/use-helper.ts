@@ -3,7 +3,7 @@ import {
   EncryptedData,
   ErrorMessage,
   GenericObject,
-  ToastType,
+  ToastType
 } from "../interface/composable.interface";
 import day from "../plugins/day";
 import { toast } from "../components/toast/use-toast";
@@ -28,7 +28,7 @@ export const useDecrypt = (data: string | null | undefined): string | null => {
   const iv = encrypted.iv;
   const secretKey = import.meta.env.VITE_APP_SCREET_KEY as string; // Menambahkan tipe eksplisit 'string'
   const decrypted = CryptoES.AES.decrypt(ciphertext, secretKey, {
-    iv: CryptoES.enc.Hex.parse(iv),
+    iv: CryptoES.enc.Hex.parse(iv)
   });
   return decrypted.toString(CryptoES.enc.Utf8);
 };
@@ -90,7 +90,7 @@ const validateDate = (str: string): boolean => {
 
 export const useInsertErr = (
   errMsg: ErrorMessage[] | Record<string, string>,
-  obj: GenericObject,
+  obj: GenericObject
 ): void => {
   const isArr = Array.isArray(errMsg);
 
@@ -102,7 +102,7 @@ export const useInsertErr = (
     for (let key in errMsg) {
       const errorKey = key.toLowerCase();
       const propKey = Object.keys(obj).find(
-        (k) => k.toLowerCase() === errorKey,
+        (k) => k.toLowerCase() === errorKey
       );
       if (propKey) {
         obj[propKey] = errMsg[key];
@@ -116,7 +116,7 @@ export const useToast = (message: string, type: ToastType) => {
     title: message,
     position: "top-right",
     type: type,
-    variant: "filled",
+    variant: "filled"
   });
 };
 
@@ -125,7 +125,7 @@ export const useRemoveStorage = () => {
   if (token) {
     Cookies.remove("hAS-aTH");
     Cookies.remove("glbl-unq-hr");
-    Cookies.remove("as-hris");
+    Cookies.remove("as-bermentor");
     Cookies.remove("id_profile");
     localStorage.clear();
   }

@@ -75,7 +75,7 @@ import { reactive, ref } from "vue";
 import {
   useEncrypt,
   useFilterProperties,
-  useResetErr,
+  useResetErr
 } from "../../composables/use-helper";
 import useApi from "../../composables/use-api";
 import Cookies from "js-cookie";
@@ -120,7 +120,7 @@ const generalError = ref<string>("");
 
 const form = reactive<formLogin>({
   key: "",
-  password: "",
+  password: ""
 });
 
 const errs = reactive<Record<string, string>>({});
@@ -134,7 +134,7 @@ const login = (): void => {
 
   const req: reqIf = {
     path: "auth/login",
-    body: body,
+    body: body
   };
 
   api
@@ -165,20 +165,20 @@ const setResponse = (res: responseLogin): void => {
   const token = useEncrypt(res.token);
   if (token) {
     Cookies.set("hAS-aTH", JSON.stringify(token), {
-      expires: 7,
+      expires: 7
     });
   }
   const uid = useEncrypt(`${res.payload.id}`);
   if (uid) {
     Cookies.set("glbl-unq-hr", JSON.stringify(uid), {
-      expires: 7,
+      expires: 7
     });
   }
 
   const role = useEncrypt(res.payload.role.name);
   if (role) {
-    Cookies.set("as-hris", JSON.stringify(role), {
-      expires: 7,
+    Cookies.set("as-bermentor", JSON.stringify(role), {
+      expires: 7
     });
   }
   store.token = res.token;

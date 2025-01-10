@@ -15,7 +15,7 @@ const useMenu = ():
   | typeof employee
   | Ref<any[]> => {
   // Dapatkan dan decrypt cookie
-  const role: Role = useDecrypt(Cookies.get("as-hris"));
+  const role: Role = useDecrypt(Cookies.get("as-bermentor"));
 
   // Tentukan menu berdasarkan role
   switch (role) {
