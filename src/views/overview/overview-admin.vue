@@ -29,7 +29,7 @@
                 :class="`${item.color}`"
                 class="h-[10px]"
                 :style="{
-                  width: `${item.percent}%`,
+                  width: `${item.percent}%`
                 }"
               ></div>
             </div>
@@ -64,7 +64,7 @@
                   :class="item.color"
                   class="h-[10px]"
                   :style="{
-                    width: `${(item.value / 50) * 100}%`,
+                    width: `${(item.value / 50) * 100}%`
                   }"
                 ></div>
               </div>
@@ -106,7 +106,7 @@
                 :class="`${item.color}`"
                 class="h-[10px]"
                 :style="{
-                  width: `${item.percent}%`,
+                  width: `${item.percent}%`
                 }"
               ></div>
             </div>
@@ -158,42 +158,38 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import day from "../../plugins/day";
-
-const m = ref(null);
-
 const employeeStatus = [
   {
     name: "Permanent",
     value: 10,
     percent: 20,
-    color: "bg-[#FFA60A]",
+    color: "bg-[#FFA60A]"
   },
   {
     name: "Contract",
     value: 40,
     percent: 80,
-    color: "bg-[#2F3CED]",
-  },
+    color: "bg-[#2F3CED]"
+  }
 ];
 
 const position = [
   {
     name: "CEO",
     value: 10,
-    color: "bg-[#FFA60A]",
+    color: "bg-[#FFA60A]"
   },
   {
     name: "Manager",
     value: 30,
-    color: "bg-[#2F3CED]",
+    color: "bg-[#2F3CED]"
   },
   {
     name: "Marbot",
     value: 10,
-    color: "bg-[#1FC7D2]",
-  },
+    color: "bg-[#1FC7D2]"
+  }
 ];
 
 const Gender = [
@@ -201,13 +197,13 @@ const Gender = [
     name: "Male",
     value: 10,
     percent: 20,
-    color: "bg-[#FFA60A]",
+    color: "bg-[#FFA60A]"
   },
   {
     name: "Female",
     value: 40,
     percent: 80,
-    color: "bg-[#2F3CED]",
-  },
+    color: "bg-[#2F3CED]"
+  }
 ];
 </script>

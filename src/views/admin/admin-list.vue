@@ -77,11 +77,6 @@
                   {{ item.username ?? "-" }}
                 </p>
               </td>
-              <td class="py-2 px-6">
-                <p class="font-medium">
-                  {{ item.company?.name ?? "-" }}
-                </p>
-              </td>
               <td class="py-2 px-4">
                 <h-menu arrow closeOnClick>
                   <template #default="{ isOpen }">
@@ -247,7 +242,7 @@ const getAdmin = (): void => {
   });
 };
 
-const columns: string[] = ["No.", "Name", "Email", "Company", "Username", ""];
+const columns: string[] = ["No.", "Name", "Email", "Username", ""];
 
 const pocket = ref<any>(null);
 

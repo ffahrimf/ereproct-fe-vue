@@ -106,7 +106,6 @@ const router = useRouter();
 const logout = () => {
   useRemoveStorage();
   store.profile = null;
-  store.company = null;
   store.token = null;
   store.role = null;
   store.guid = null;
@@ -120,7 +119,6 @@ const getProfile = () => {
   api.get(`user?id=${store.guid}`).then((res) => {
     const raw: AdminIF | null = res.data.items[0] ?? null;
     store.profile = raw;
-    store.company = raw?.company ?? null;
     store.splash = false;
   });
 };
@@ -129,4 +127,3 @@ onMounted(() => {
   getProfile();
 });
 </script>
-

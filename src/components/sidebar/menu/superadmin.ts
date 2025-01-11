@@ -7,22 +7,15 @@ const superadmin = ref<MenuIF[]>([
     icon: "squares-2X2",
     path: "/",
     sub: [],
-    toggle: false,
-  },
-  {
-    name: "Company",
-    icon: "briefcase",
-    path: "/company",
-    sub: [],
-    toggle: false,
+    toggle: false
   },
   {
     name: "Admin",
     icon: "user",
     path: "/admin",
     sub: [],
-    toggle: false,
-  },
+    toggle: false
+  }
 ]);
 
 export default superadmin;

@@ -1,6 +1,6 @@
 import superadmin from "../components/sidebar/menu/superadmin";
-import admin from "../components/sidebar/menu/admin";
-import employee from "../components/sidebar/menu/exmployee";
+import mentor from "../components/sidebar/menu/mentor";
+import student from "../components/sidebar/menu/student";
 import { useDecrypt } from "./use-helper";
 import Cookies from "js-cookie";
 import { ref, Ref } from "vue";
@@ -11,8 +11,8 @@ type Role = string | null;
 const emptyMenu: Ref<any[]> = ref([]);
 const useMenu = ():
   | typeof superadmin
-  | typeof admin
-  | typeof employee
+  | typeof mentor
+  | typeof student
   | Ref<any[]> => {
   // Dapatkan dan decrypt cookie
   const role: Role = useDecrypt(Cookies.get("as-bermentor"));
@@ -21,10 +21,10 @@ const useMenu = ():
   switch (role) {
     case "SUPERADMIN":
       return superadmin;
-    case "ADMIN":
-      return admin;
-    case "EMPLOYEE":
-      return employee;
+    case "MENTOR":
+      return mentor;
+    case "STUDENT":
+      return student;
     default:
       return emptyMenu; // Jika role tidak ditemukan
   }
