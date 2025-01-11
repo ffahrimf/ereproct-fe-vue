@@ -12,7 +12,6 @@ export const mainStore = defineStore("main", {
     manager: useDecrypt(Cookies.get("aprvl-ln")),
     id_table: null,
     profile: null,
-    company: null,
     permissions: [],
     placement: null,
     expand: true,
@@ -24,21 +23,7 @@ export const mainStore = defineStore("main", {
     ip: null,
     device: "",
     splash: true,
-    coords: {
-      lat: "",
-      lng: ""
-    },
-    isMobile: false,
-    badge: {
-      internal_mutation: 0,
-      external_mutation: 0,
-      travel_proposal: 0,
-      training_proposal: 0,
-      employee_leave_proposal: 0,
-      employee_overtime_proposal: 0,
-      employee_loan_proposal: 0,
-      vacancy_request: 0
-    }
+    isMobile: false
   }),
   getters: {
     isAuthenticated: (state: State): boolean =>

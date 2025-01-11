@@ -1,4 +1,3 @@
-copy ken ajaran:
 <template>
   <div
     class="w-full min-h-screen bg-[#F3F5F6] flex items-center justify-center"
@@ -80,7 +79,6 @@ import {
 import useApi from "../../composables/use-api";
 import Cookies from "js-cookie";
 import { useRoute, useRouter } from "vue-router";
-import { CompanyIF } from "../company/company.interface";
 import { RoleIF } from "../../interface/role.interface";
 import { mainStore } from "../../store";
 
@@ -97,7 +95,6 @@ interface reqIf {
 
 interface UserIF {
   id: number;
-  company: CompanyIF;
   username: string;
   name: string;
   email: string;
