@@ -4,14 +4,14 @@
       class="bg-white rounded-md shadow-lg w-[500px] flex flex-col h-[97vh] relative"
     >
       <div class="py-2 px-6 border-b flex items-center justify-between">
-        <p class="font-medium text-slate-700 text-sm">Create Admin</p>
+        <p class="font-medium text-slate-700 text-sm">Create Student</p>
         <icon-btn icon="x-mark" @click="emit('close')" />
       </div>
       <div class="py-3 px-6 flex-1 styled-scroll">
         <div class="mb-3">
           <h-input
-            label="Nama Admin"
-            placeholder="Ketik Nama Admin..."
+            label="Nama Mahasiswa"
+            placeholder="Ketik Nama Mahasiswa..."
             v-model="form.name"
           ></h-input>
 
@@ -23,7 +23,7 @@
         <div class="mb-3">
           <h-input
             label="Email"
-            placeholder="Ketik Email Admin"
+            placeholder="Ketik Email Mahasiswa"
             v-model="form.email"
             :disabled="!!form.id"
           ></h-input>
@@ -36,7 +36,7 @@
         <div class="mb-3">
           <h-input
             label="Username"
-            placeholder="Username Admin"
+            placeholder="Username Mahasiswa"
             v-model="form.username"
             :disabled="!!form.id"
           ></h-input>
@@ -49,7 +49,7 @@
         <div class="mb-3" v-if="!form.id">
           <h-input
             label="Password"
-            placeholder="Password Admin"
+            placeholder="Password Mahasiswa"
             v-model="form.password"
           ></h-input>
           <p
@@ -73,15 +73,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+import { reactive, ref } from "vue";
 
-import useApi from "../../composables/use-api";
-import { useFilterProperties, useToast } from "../../composables/use-helper";
-import { mainStore } from "../../store";
-import { AdminIF } from "./admin.interface";
-import { GenericObject } from "../../interface/composable.interface";
+import useApi from "../../../composables/use-api";
+import { useFilterProperties, useToast } from "../../../composables/use-helper";
+import { GenericObject } from "../../../interface/composable.interface";
 
-interface CreateAdmin {
+interface CreateStudent {
   id?: string;
   name: string;
   username: string;
@@ -98,7 +96,7 @@ const emit = defineEmits(["close", "refetch"]);
 
 const api = new useApi();
 
-const form = reactive<CreateAdmin>({
+const form = reactive<CreateStudent>({
   id: "",
   name: "",
   username: "",
@@ -116,8 +114,8 @@ const errs = reactive<GenericObject>({
 const loading = ref<boolean>(false);
 const postData = (): void => {
   loading.value = true;
-  const adminRole: number = 2;
-  form["role_id"] = adminRole;
+  const studentRole: number = 3;
+  form["role_id"] = studentRole;
 
   let body = useFilterProperties(form);
 

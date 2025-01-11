@@ -1,5 +1,5 @@
 <template>
-  <table-layout icon="user" title="Admin List" subtitle="Manage your atmin">
+  <table-layout icon="user" title="Mentor List" subtitle="Manage your Mentor">
     <template #header-action>
       <div class="flex items-center">
         <h-btn
@@ -7,7 +7,7 @@
           @click="dialog.create = true"
         >
           <h-icon name="plus"></h-icon>
-          <p>Add Admin</p>
+          <p>Add Mentor</p>
         </h-btn>
       </div>
     </template>
@@ -17,8 +17,8 @@
         <div class="flex items-center gap-2">
           <h-search
             v-model="query.name"
-            placeholder="Cari karyawan..."
-            @search="getAdmin"
+            placeholder="Cari mentor..."
+            @search="getMentor"
             @keyup="loading = true"
             class="w-[300px]"
           ></h-search>
@@ -155,38 +155,39 @@
         </vue-awesome-paginate>
       </div>
     </template>
-    <CreateAdmin
+    <CreateMentor
       :dialog="dialog.create"
       @close="dialog.create = false"
-      @refetch="getAdmin"
+      @refetch="getMentor"
     />
     <DialogDelete
       v-model="dialog.delete"
       @close="dialog.delete = false"
-      @refetch="getAdmin"
+      @refetch="getMentor"
     />
   </table-layout>
 </template>
 
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
-import tableLayout from "../../components/table-layout.vue";
-import useApi from "../../composables/use-api";
+import tableLayout from "../../../components/table-layout.vue";
+import useApi from "../../../composables/use-api";
 import { useRoute, useRouter } from "vue-router";
-import { useQuery } from "../../composables/use-helper";
+import { useQuery } from "../../../composables/use-helper";
 
-import { AdminIF } from "./admin.interface";
-import CreateAdmin from "./create-admin.vue";
-import DialogDelete from "../../components/dialog-delete.vue";
+import { MentorIF } from "./mentor.interface";
+import CreateMentor from "./create-mentor.vue";
+import DialogDelete from "../../../components/dialog-delete.vue";
 
 const SkeletonTable = defineAsyncComponent(
-  () => import("../../components/skeleton-table.vue")
+  () => import("../../../components/skeleton-table.vue")
 );
 
 interface queryIf {
   page: number;
   limit: number;
   name: string;
+  role_id: number;
 }
 
 interface dialogIf {
@@ -203,7 +204,8 @@ const limits: number[] = [10, 50, 100];
 const query = reactive<queryIf>({
   page: 1,
   limit: 10,
-  name: ""
+  name: "",
+  role_id: 2
 });
 
 const dialog = reactive<dialogIf>({
@@ -213,11 +215,11 @@ const dialog = reactive<dialogIf>({
 
 const total = ref<number | null>(null);
 
-const data = ref<AdminIF[] | []>([]);
+const data = ref<MentorIF[] | []>([]);
 
 const paginate = (number: number): any => {
   query.page = number;
-  getAdmin();
+  getMentor();
   router.replace({
     path: route.path,
     query: { ...route.query, page: number }
@@ -226,16 +228,16 @@ const paginate = (number: number): any => {
 
 const onFilter = () => {
   query.page = 1;
-  getAdmin();
+  getMentor();
 };
 
-const getAdmin = (): void => {
+const getMentor = (): void => {
   loading.value = true;
   console.log(query.name);
   const q = useQuery(query);
   api.get(`user${q}`).then((res) => {
     console.log(res);
-    const raw: AdminIF[] | [] = res.data.items;
+    const raw: MentorIF[] | [] = res.data.items;
     data.value = raw;
     total.value = res.data.total;
     loading.value = false;
@@ -246,7 +248,7 @@ const columns: string[] = ["No.", "Name", "Email", "Username", ""];
 
 const pocket = ref<any>(null);
 
-const onDelete = (item: AdminIF) => {
+const onDelete = (item: MentorIF) => {
   pocket.value = {
     path: `user/delete/${item.id}`
   };
@@ -265,6 +267,6 @@ const currentPage = () => {
 };
 onMounted(() => {
   currentPage();
-  getAdmin();
+  getMentor();
 });
 </script>

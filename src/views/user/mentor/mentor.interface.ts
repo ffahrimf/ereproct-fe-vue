@@ -1,6 +1,6 @@
-import { RoleIF } from "../../interface/role.interface";
+import { RoleIF } from "../../../interface/role.interface";
 
-export interface AdminIF {
+export interface MentorIF {
   id: number;
   uuid: string;
   username: string;

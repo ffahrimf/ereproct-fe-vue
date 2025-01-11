@@ -2,16 +2,21 @@
   <div class="h-full flex flex-col">
     <div class="h-[50px] p-3 flex items-center gap-2">
       <h-icon name="folder" outline></h-icon>
-      <p class="text-sm text-slate-700">
-        <span class="font-bold">HRIS</span> Integrated System
-      </p>
+      <p class="text-sm text-slate-700">Online Course</p>
     </div>
     <div class="px-3 mb-3">
       <div class="bg-slate-50 rounded p-3 flex items-center gap-3">
-        <div class="w-7 h-7 bg-slate-500 rounded-md"></div>
+        <div class="w-7 h-7 rounded-md overflow-hidden">
+          <img
+            src="../../assets/img/profile.jpg"
+            class="object-cover w-full h-full"
+            alt=""
+          />
+        </div>
+
         <div class="flex-1">
-          <p class="text-sm font-medium">Isayana Sarasvati</p>
-          <p class="text-xs text-slate-500">isyana@kerem.com</p>
+          <p class="text-sm font-medium">John Doe</p>
+          <p class="text-xs text-slate-500">example@gmail.com</p>
         </div>
       </div>
     </div>

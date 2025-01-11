@@ -25,7 +25,7 @@ const props = defineProps({
   size: { type: String, default: "20" },
   color: { type: String, default: "" },
   mode: { type: String, default: "heroicons" },
-  outline: Boolean,
+  outline: Boolean
 });
 
 const formattedIcon = () => {

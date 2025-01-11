@@ -10,21 +10,32 @@ import { mainStore } from "./store";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    name: "guest",
+    component: () => import("./views/guest.vue"),
+    meta: { requiresAuth: false }
+  },
+  {
+    path: "/dashboard",
     name: "in-app",
     component: () => import("./views/home.vue"),
     meta: { requiresAuth: true },
     children: [
       {
-        path: "",
+        path: "/dashboard/overview",
         name: "overview",
         component: () => import("./views/overview/main-overview.vue"),
         meta: { requiresAuth: true }
       },
-
       {
-        path: "/admin",
-        name: "admin-list",
-        component: () => import("./views/admin/admin-list.vue"),
+        path: "/dashboard/user/mentor",
+        name: "mentor-list",
+        component: () => import("./views/user/mentor/mentor-list.vue"),
+        meta: { requiresAuth: true }
+      },
+      {
+        path: "/dashboard/user/student",
+        name: "student-list",
+        component: () => import("./views/user/student/student-list.vue"),
         meta: { requiresAuth: true }
       }
     ]
