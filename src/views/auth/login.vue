@@ -33,12 +33,12 @@
           <div class="mb-3">
             <h-input
               label="Email/Username"
-              v-model="form.key"
+              v-model="form.email"
               placeholder="Ketik Email atau Username Anda..."
             ></h-input>
             <p
               class="text-sm text-red-500 whitespace-pre"
-              v-html="errs.key"
+              v-html="errs.email"
             ></p>
           </div>
           <div class="mb-3">
@@ -79,12 +79,11 @@ import {
 import useApi from "../../composables/use-api";
 import Cookies from "js-cookie";
 import { useRoute, useRouter } from "vue-router";
-import { RoleIF } from "../../interface/role.interface";
 import { mainStore } from "../../store";
 
 const store = mainStore();
 interface formLogin {
-  key?: string;
+  email?: string;
   password?: string;
 }
 
@@ -100,12 +99,11 @@ interface UserIF {
   email: string;
   email_verified_at?: number;
   password: string;
-  role: RoleIF;
+  role: string | any;
 }
 interface responseLogin {
-  token: string;
-  refresh_token: string;
-  payload: UserIF;
+  user: UserIF;
+  accessToken: string;
 }
 
 const api = new useApi();
@@ -116,7 +114,7 @@ const route = useRoute();
 const generalError = ref<string>("");
 
 const form = reactive<formLogin>({
-  key: "",
+  email: "",
   password: ""
 });
 
@@ -137,8 +135,8 @@ const login = (): void => {
   api
     .post(req)
     .then((res) => {
-      const response: responseLogin = res.data;
-
+      const response: responseLogin = res;
+      console.log(response);
       setResponse(response);
       loading.value = false;
     })
@@ -159,28 +157,30 @@ const login = (): void => {
 };
 
 const setResponse = (res: responseLogin): void => {
-  const token = useEncrypt(res.token);
+  const token = useEncrypt(res.accessToken);
   if (token) {
     Cookies.set("hAS-aTH", JSON.stringify(token), {
       expires: 7
     });
   }
-  const uid = useEncrypt(`${res.payload.id}`);
+  const uid = useEncrypt(`${res.user.id}`);
   if (uid) {
     Cookies.set("glbl-unq-hr", JSON.stringify(uid), {
       expires: 7
     });
   }
 
-  const role = useEncrypt(res.payload.role.name);
+  const hardRole = "SUPERADMIN";
+  const role = useEncrypt(hardRole);
   if (role) {
     Cookies.set("as-bermentor", JSON.stringify(role), {
       expires: 7
     });
   }
-  store.token = res.token;
-  store.role = res.payload.role.name;
-  store.guid = `${res?.payload?.id}`;
+
+  store.token = res.accessToken;
+  store.role = hardRole;
+  store.guid = `${res?.user?.id}`;
   const qp = route.query.redirect ?? null;
   const redirect = Array.isArray(qp) ? qp[0] : qp;
   router.push(redirect ? redirect : "/dashboard");

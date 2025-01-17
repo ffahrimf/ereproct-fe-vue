@@ -5,7 +5,7 @@ const student = ref<MenuIF[]>([
   {
     name: "Overview",
     icon: "squares-2x2",
-    path: "/",
+    path: "/dashboard/overview",
     sub: [],
     toggle: false
   }

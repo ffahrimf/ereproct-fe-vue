@@ -1,6 +1,6 @@
 import { RoleIF } from "../../../interface/role.interface";
 
-export interface StudentIF {
+export interface UserIF {
   id: number;
   uuid: string;
   username: string;

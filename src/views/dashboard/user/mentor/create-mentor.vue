@@ -75,9 +75,12 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
 
-import useApi from "../../../composables/use-api";
-import { useFilterProperties, useToast } from "../../../composables/use-helper";
-import { GenericObject } from "../../../interface/composable.interface";
+import useApi from "../../../../composables/use-api";
+import {
+  useFilterProperties,
+  useToast
+} from "../../../../composables/use-helper";
+import { GenericObject } from "../../../../interface/composable.interface";
 
 interface CreateMentor {
   id?: string;

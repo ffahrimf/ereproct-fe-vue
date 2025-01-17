@@ -170,17 +170,17 @@
 
 <script lang="ts" setup>
 import { defineAsyncComponent, onMounted, reactive, ref } from "vue";
-import tableLayout from "../../../components/table-layout.vue";
-import useApi from "../../../composables/use-api";
+import tableLayout from "../../../../components/table-layout.vue";
+import useApi from "../../../../composables/use-api";
 import { useRoute, useRouter } from "vue-router";
-import { useQuery } from "../../../composables/use-helper";
+import { useQuery } from "../../../../composables/use-helper";
 
-import { MentorIF } from "./mentor.interface";
+import { UserIF } from "../user.interface";
 import CreateMentor from "./create-mentor.vue";
-import DialogDelete from "../../../components/dialog-delete.vue";
+import DialogDelete from "../../../../components/dialog-delete.vue";
 
 const SkeletonTable = defineAsyncComponent(
-  () => import("../../../components/skeleton-table.vue")
+  () => import("../../../../components/skeleton-table.vue")
 );
 
 interface queryIf {
@@ -215,7 +215,7 @@ const dialog = reactive<dialogIf>({
 
 const total = ref<number | null>(null);
 
-const data = ref<MentorIF[] | []>([]);
+const data = ref<UserIF[] | []>([]);
 
 const paginate = (number: number): any => {
   query.page = number;
@@ -237,7 +237,7 @@ const getMentor = (): void => {
   const q = useQuery(query);
   api.get(`user${q}`).then((res) => {
     console.log(res);
-    const raw: MentorIF[] | [] = res.data.items;
+    const raw: UserIF[] | [] = res.data.items;
     data.value = raw;
     total.value = res.data.total;
     loading.value = false;
@@ -248,7 +248,7 @@ const columns: string[] = ["No.", "Name", "Email", "Username", ""];
 
 const pocket = ref<any>(null);
 
-const onDelete = (item: MentorIF) => {
+const onDelete = (item: UserIF) => {
   pocket.value = {
     path: `user/delete/${item.id}`
   };

@@ -97,7 +97,7 @@ import { onMounted, ref } from "vue";
 import { useRemoveStorage } from "../../composables/use-helper";
 import useApi from "../../composables/use-api";
 import { mainStore } from "../../store";
-import { MentorIF } from "./user/mentor/mentor.interface";
+import { UserIF } from "./user/user.interface";
 import SplashScreen from "../../components/splash-screen.vue";
 import { useRouter } from "vue-router";
 const expand = ref<boolean>(true);
@@ -114,10 +114,11 @@ const logout = () => {
 
 const api = new useApi();
 const store = mainStore();
+
 const getProfile = () => {
   store.splash = true;
   api.get(`user?id=${store.guid}`).then((res) => {
-    const raw: MentorIF | null = res.data.items[0] ?? null;
+    const raw: UserIF | null = res.data.items[0] ?? null;
     store.profile = raw;
     store.splash = false;
   });
