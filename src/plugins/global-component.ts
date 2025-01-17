@@ -25,20 +25,22 @@ import hTimePicker from "../components/base/h-time-picker.vue";
 import hLabel from "../components/base/h-label.vue";
 import hMonthPicker from "../components/base/h-month-picker.vue";
 import hYearPicker from "../components/base/h-year-picker.vue";
+import HAccordion from "../components/base/h-accordion.vue";
 
 const spinner = defineAsyncComponent(
-  () => import("../components/base/spinner.vue"),
+  () => import("../components/base/spinner.vue")
 );
 
 const hOverlay = defineAsyncComponent(
-  () => import("../components/base/h-overlay.vue"),
+  () => import("../components/base/h-overlay.vue")
 );
 
 const hDialog = defineAsyncComponent(
-  () => import("../components/base/h-dialog.vue"),
+  () => import("../components/base/h-dialog.vue")
 );
 
 export const globalcomponent = (app: App): void => {
+  app.component("h-accordion", HAccordion);
   app.component("h-avatar", hAvatar);
   app.component("h-select", hSelect);
   app.component("h-select-filter", hSelectFilter);

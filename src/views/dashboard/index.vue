@@ -91,14 +91,14 @@
 </template>
 
 <script lang="ts" setup>
-import Sidebar from "../components/sidebar/sidebar.vue";
-import Drawer from "../components/icons/drawer.vue";
+import Sidebar from "../../components/sidebar/sidebar.vue";
+import Drawer from "../../components/icons/drawer.vue";
 import { onMounted, ref } from "vue";
-import { useRemoveStorage } from "../composables/use-helper";
-import useApi from "../composables/use-api";
-import { mainStore } from "../store";
+import { useRemoveStorage } from "../../composables/use-helper";
+import useApi from "../../composables/use-api";
+import { mainStore } from "../../store";
 import { MentorIF } from "./user/mentor/mentor.interface";
-import SplashScreen from "../components/splash-screen.vue";
+import SplashScreen from "../../components/splash-screen.vue";
 import { useRouter } from "vue-router";
 const expand = ref<boolean>(true);
 const router = useRouter();

@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import "./style.css";
 import App from "./App.vue";
-import router from "./router";
+import router from "./routes";
 import mdiVue from "mdi-vue/v3";
 import * as mdijs from "@mdi/js";
 import { createPinia } from "pinia";
