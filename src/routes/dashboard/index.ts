@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import userRoutes from "./user"; // Import user routes dari file user.ts
+import userRoutes from "./user";
 
 const dashboardRoutes: Array<RouteRecordRaw> = [
   {

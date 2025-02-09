@@ -117,14 +117,23 @@ const store = mainStore();
 
 const getProfile = () => {
   store.splash = true;
-  api.get(`user?id=${store.guid}`).then((res) => {
-    const raw: UserIF | null = res.data.items[0] ?? null;
+  let req = {
+    path: `auth/me`,
+    body: {}
+  };
+
+  api.post(req).then((res) => {
+    console.log("Respons GetProfile:", res);
+    const raw: UserIF | null = res.list_data ?? null;
     store.profile = raw;
+    console.log("Profile:", store.profile);
     store.splash = false;
   });
 };
 
 onMounted(() => {
+  console.log("Role:", store.role);
   getProfile();
+  store.splash = false;
 });
 </script>

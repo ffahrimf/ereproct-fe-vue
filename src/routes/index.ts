@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
     next({ path: "/auth/login", query: { redirect: to.fullPath } });
     return;
   } else if (to.meta.requiresVisitor && store.isAuthenticated) {
-    next("/");
+    next("/dashboard");
     return;
   }
 

@@ -1,9 +1,11 @@
 <template>
   <div class="relative">
     <div class="mb-1">
-      <label class="text-sm font-medium text-slate-700" :for="id">{{
-        label
-      }}</label>
+      <label
+        class="text-xs md:text-base lg:text-xs xl:text-base text-word"
+        :for="id"
+        >{{ label }}</label
+      >
     </div>
     <div class="relative">
       <input
@@ -33,7 +35,7 @@ import { ref } from "vue";
 
 defineOptions({
   name: "InputComponent",
-  inheritAttrs: false,
+  inheritAttrs: false
 });
 
 interface PropsIF {
@@ -51,29 +53,29 @@ const props: PropsIF = defineProps({
   id: { type: String, default: "id" },
   modelValue: {
     type: [String, Number],
-    default: undefined,
+    default: undefined
   },
   accept: {
     type: String,
-    default: undefined,
+    default: undefined
   },
   placeholder: {
     type: String,
-    default: "",
+    default: ""
   },
   label: {
     type: String,
-    default: "",
+    default: ""
   },
   subtitle: {
     type: String,
-    default: "",
+    default: ""
   },
   unit: {
     type: String,
-    default: "",
+    default: ""
   },
-  autofocus: Boolean,
+  autofocus: Boolean
 });
 
 const emits = defineEmits(["update:modelValue", "clear"]);
@@ -123,7 +125,7 @@ const removeUnaccepted = (value: string) => {
 
 <style lang="postcss" scoped>
 .input__form {
-  @apply py-[10px] px-3 text-sm bg-white relative rounded border border-solid w-full outline-none;
+  @apply py-3 px-5 text-xs md:text-base lg:text-xs xl:text-base bg-white relative rounded-3xl border border-solid w-full outline-none;
   &:focus {
     @apply border-blue-200 ring-2 ring-blue-300/10 z-[1];
   }

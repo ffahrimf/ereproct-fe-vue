@@ -11,13 +11,13 @@
     <div
       v-if="isOpen"
       ref="target"
-      class="z-50 rounded-xl absolute shadow border bg-white elevation border-gray-200"
+      class="z-50 rounded-3xl absolute shadow-md bg-white elevation"
       :style="full ? `width: ${parentWidth.width.value + 18}px` : 'max-content'"
     >
       <div class="pb-3" v-if="loading">
         <ProgressLinear />
       </div>
-      <div class="z-[51] relative rounded-xl bg-white" ref="menuRef">
+      <div class="z-[51] relative rounded-3xl bg-white" ref="menuRef">
         <div @click="isCloseOnClick()">
           <slot name="item"></slot>
         </div>
@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { ref, watchEffect, watch } from "vue";
-import { useElementSize, useScroll } from "@vueuse/core";
+import { onClickOutside, useElementSize, useScroll } from "@vueuse/core";
 import {
   autoUpdate,
   computePosition,
@@ -82,6 +82,12 @@ const isCloseOnClick = () => {
     });
   }
 };
+
+onClickOutside(target, (_event) => {
+  setTimeout(() => {
+    closeMenu();
+  });
+});
 
 const closeMenu = () => {
   isOpen.value = false;

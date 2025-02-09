@@ -50,7 +50,7 @@ import {
   hide,
   offset,
   shift,
-  arrow as conArrow,
+  arrow as conArrow
 } from "@floating-ui/dom";
 
 const props = defineProps<{
@@ -113,7 +113,7 @@ const onReset = () => {
 };
 
 defineExpose({
-  onReset,
+  onReset
 });
 
 const scrollYear = () => {
@@ -135,7 +135,7 @@ watchEffect(
         computePosition(root.value!, target.value!, {
           strategy: "absolute",
           placement: "bottom",
-          middleware: middleware.value,
+          middleware: middleware.value
         }).then(({ x, y, placement, middlewareData }) => {
           if (target.value) {
             target.value.style.left = `${x || 0}px`;
@@ -150,7 +150,7 @@ watchEffect(
               if (arrowEl.value) {
                 Object.assign(arrowEl.value.style, {
                   [`${isTop ? "bottom" : "top"}`]: "-4px",
-                  left: x != null ? `${x}px` : "",
+                  left: x != null ? `${x}px` : ""
                 });
               }
             }
@@ -161,7 +161,7 @@ watchEffect(
       onCleanup(cleanup);
     }
   },
-  { flush: "post" },
+  { flush: "post" }
 );
 </script>
 

@@ -20,7 +20,7 @@ withDefaults(defineProps<PropsIF>(), {
   mode: "heroicons",
   size: "20",
   css: "hover:bg-primary/20 active:bg-primary/50",
-  icon: undefined,
+  icon: undefined
 });
 </script>
 

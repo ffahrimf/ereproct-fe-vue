@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<PropsIf>(), {
   flat: true,
   color: "text-white",
   textSize: "text-sm",
-  outline: false,
+  outline: false
 });
 
 // const props = defineProps({

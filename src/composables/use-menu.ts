@@ -19,7 +19,7 @@ const useMenu = ():
 
   // Tentukan menu berdasarkan role
   switch (role) {
-    case "SUPERADMIN":
+    case "Super Admin":
       return superadmin;
     case "MENTOR":
       return mentor;

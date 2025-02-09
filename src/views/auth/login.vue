@@ -5,13 +5,15 @@
     <div
       class="w-[430px] p-10 rounded-lg shadow bg-white flex items-center flex-col gap-3"
     >
-      <div class="p-3 bg-blue-500 rounded-full">
-        <h-icon name="cube-transparent" size="30" class="text-white"></h-icon>
+      <div class="p-3 rounded-full">
+        <img
+          src="../../assets/img/landing/logo-text.png"
+          class="h-[35px]"
+          alt=""
+        />
       </div>
-      <div class="text-center">
-        <p class="text-[35px] font-medium">Welcome Back</p>
-        <p class="text-sm text-slate-500 leading-3">Glad to see you again 👋</p>
-        <p class="text-sm text-slate-500">Login to your account bellow</p>
+      <div class="text-center mb-3">
+        <p class="text-2xl font-medium">Welcome Back</p>
       </div>
 
       <!-- Pesan Error -->
@@ -52,7 +54,10 @@
               v-html="errs.password"
             ></p>
           </div>
-          <h-btn v-if="!loading" class="px-3 py-2 w-full" type="submit"
+          <h-btn
+            v-if="!loading"
+            class="px-3 py-2 w-full rounded-3xl text-base"
+            type="submit"
             >Login</h-btn
           >
           <h-btn
@@ -74,12 +79,14 @@ import { reactive, ref } from "vue";
 import {
   useEncrypt,
   useFilterProperties,
-  useResetErr
+  useResetErr,
+  useToast
 } from "../../composables/use-helper";
 import useApi from "../../composables/use-api";
 import Cookies from "js-cookie";
 import { useRoute, useRouter } from "vue-router";
 import { mainStore } from "../../store";
+import { RoleIF } from "../../interface/role.interface";
 
 const store = mainStore();
 interface formLogin {
@@ -92,18 +99,31 @@ interface reqIf {
   body: formLogin;
 }
 
+interface ListDataIF {
+  expires_in: number;
+  token: string;
+  token_type: string;
+  user: UserIF;
+}
+
 interface UserIF {
   id: number;
   username: string;
   name: string;
   email: string;
   email_verified_at?: number;
-  password: string;
-  role: string | any;
+  roles: RoleIF[];
 }
+
+interface MetaIF {
+  code: number;
+  message: string;
+  success: string;
+}
+
 interface responseLogin {
-  user: UserIF;
-  accessToken: string;
+  meta: MetaIF;
+  list_data: ListDataIF;
 }
 
 const api = new useApi();
@@ -136,14 +156,15 @@ const login = (): void => {
     .post(req)
     .then((res) => {
       const response: responseLogin = res;
-      console.log(response);
+      console.log("response login:", response);
       setResponse(response);
       loading.value = false;
+      useToast(res.meta.message, "success");
     })
     .catch((err) => {
       loading.value = false;
-      console.log(err.errors);
-      const requiredErr = err.errors;
+      // console.log("respon error:",err.meta.message);
+      const requiredErr = err.meta.message;
       if (requiredErr) {
         for (let key in requiredErr) {
           errs[key] =
@@ -152,35 +173,34 @@ const login = (): void => {
               : requiredErr[key][0];
         }
       }
-      generalError.value = err.message;
+      generalError.value = requiredErr;
     });
 };
 
 const setResponse = (res: responseLogin): void => {
-  const token = useEncrypt(res.accessToken);
+  const token = useEncrypt(res.list_data.token);
   if (token) {
     Cookies.set("hAS-aTH", JSON.stringify(token), {
       expires: 7
     });
   }
-  const uid = useEncrypt(`${res.user.id}`);
+  const uid = useEncrypt(`${res.list_data.user.id}`);
   if (uid) {
     Cookies.set("glbl-unq-hr", JSON.stringify(uid), {
       expires: 7
     });
   }
 
-  const hardRole = "SUPERADMIN";
-  const role = useEncrypt(hardRole);
+  const role = useEncrypt(res.list_data.user.roles[0].name);
   if (role) {
     Cookies.set("as-bermentor", JSON.stringify(role), {
       expires: 7
     });
   }
 
-  store.token = res.accessToken;
-  store.role = hardRole;
-  store.guid = `${res?.user?.id}`;
+  store.token = res.list_data.token;
+  store.role = res.list_data.user.roles[0].name;
+  store.guid = `${res?.list_data.user.id}`;
   const qp = route.query.redirect ?? null;
   const redirect = Array.isArray(qp) ? qp[0] : qp;
   router.push(redirect ? redirect : "/dashboard");
