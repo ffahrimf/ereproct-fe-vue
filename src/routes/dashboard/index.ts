@@ -8,7 +8,7 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
     component: () => import("../../views/dashboard/index.vue"),
     meta: {
       requiresAuth: true,
-      title: "Bermentor - Dashboard",
+      title: "Dashboard",
       description: "Kelola mentor dan student di dashboard Bermentor."
     },
     children: [
@@ -19,7 +19,7 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
           import("../../views/dashboard/overview/main-overview.vue"),
         meta: {
           requiresAuth: true,
-          title: "Bermentor - Overview",
+          title: "Overview",
           description: "Tinjau performa mentorship Anda di Overview."
         }
       },

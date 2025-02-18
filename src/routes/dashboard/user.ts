@@ -8,7 +8,7 @@ const userRoutes: Array<RouteRecordRaw> = [
       import("../../views/dashboard/user/mentor/mentor-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "Bermentor - Mentor List",
+      title: "Mentor List",
       description: "Daftar mentor terbaik tersedia di sini."
     }
   },
@@ -19,7 +19,7 @@ const userRoutes: Array<RouteRecordRaw> = [
       import("../../views/dashboard/user/student/student-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "Bermentor - Student List",
+      title: "Student List",
       description: "Daftar student terhubung dengan mentor di sini."
     }
   }
