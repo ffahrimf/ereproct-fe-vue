@@ -39,41 +39,42 @@
     </button>
 
     <div class="space-x-2 hidden lg:block">
-      <h-nav-menu closeOnClick>
-        <button
+      <router-link :to="`/auth/register/mentor`"
+        ><button
           class="bg-secondary rounded-full active:scale-95 py-2.5 px-6 text-white border-4 border-white hover:border-[#FFC8AA] transition duration-1000 ease-out"
         >
           Daftar menjadi Mentor
+        </button></router-link
+      >
+      <h-nav-menu closeOnClick closeOnClickOutside>
+        <button
+          class="border-2 border-secondary hover:border-[#FFC8AA] active:scale-95 rounded-full py-2.5 px-6 text-secondary bg-transparent transition duration-1000 ease-out"
+        >
+          Masuk
         </button>
         <template #item>
           <div class="min-w-[220px] px-2 py-1 text-word text-xs xl:text-sm">
-            <router-link :to="`auth/register`">
+            <router-link :to="`/auth/login`">
               <div
                 class="flex py-3 px-10 mt-1 justify-center rounded cursor-pointer mb-1 group"
               >
                 <p
                   class="group-hover:text-secondary transition duration-300 ease-in-out"
                 >
-                  Daftar sebagai pelajar
+                  Masuk sebagai pelajar
                 </p>
               </div>
             </router-link>
-            <router-link :to="`auth/register`">
+            <router-link :to="`/auth/register/student`">
               <div
                 class="flex py-3 px-10 bg-panel hover:bg-opacity-60 justify-center transition duration-300 ease-in-out rounded-full cursor-pointer mb-1"
               >
-                <p>Daftar sebagai mentor</p>
+                <p>Daftar sebagai pelajar</p>
               </div>
             </router-link>
           </div>
         </template>
-      </h-nav-menu closeOnClick>
-      <router-link :to="`auth/login`"><button
-        class="border-2 border-secondary hover:border-[#FFC8AA] active:scale-95 rounded-full py-2.5 px-6 text-secondary bg-transparent transition duration-1000 ease-out"
-      >
-        Masuk
-      </button>
-    </router-link>
+      </h-nav-menu>
     </div>
   </div>
   <Drawer :dialog="expand" @close="expand = false" />

@@ -1,11 +1,9 @@
 <template>
   <div class="relative">
     <div class="mb-1">
-      <label
-        class="text-xs md:text-base lg:text-xs xl:text-base text-word"
-        :for="id"
-        >{{ label }}</label
-      >
+      <label class="text-sm font-medium text-slate-700" :for="id">{{
+        label
+      }}</label>
     </div>
     <div class="relative">
       <input
@@ -125,7 +123,7 @@ const removeUnaccepted = (value: string) => {
 
 <style lang="postcss" scoped>
 .input__form {
-  @apply py-3 px-5 text-xs md:text-base lg:text-xs xl:text-base bg-white relative rounded-3xl border border-solid w-full outline-none;
+  @apply py-[10px] px-3 text-sm bg-white relative rounded border border-solid w-full outline-none;
   &:focus {
     @apply border-blue-200 ring-2 ring-blue-300/10 z-[1];
   }

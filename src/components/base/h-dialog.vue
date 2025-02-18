@@ -1,7 +1,7 @@
 <template>
   <Transition :duration="450" name="nested">
     <div
-      class="fixed w-full h-screen inset-0 bg-gray-600 bg-opacity-50 top-0 left-0 z-50 flex justify-end items-start transition-side overflow-hidden outer"
+      class="fixed w-full h-screen inset-0 bg-gray-600 bg-opacity-50 top-0 left-0 z-50 flex justify-center items-center transition-side overflow-hidden outer"
       role="dialog"
       v-if="dialog"
       @click.self="closeDialog"
@@ -53,7 +53,7 @@ const closeDialog = () => {
 
 .nested-enter-from .inner,
 .nested-leave-to .inner {
-  transform: translateX(100px);
+  transform: translateY(-100px);
 
   opacity: 0.001;
 }

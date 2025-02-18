@@ -8,12 +8,9 @@
       <div class="p-3 rounded-full">
         <img
           src="../../assets/img/landing/logo-text.png"
-          class="h-[35px]"
+          class="h-[50px] mb-5"
           alt=""
         />
-      </div>
-      <div class="text-center mb-3">
-        <p class="text-2xl font-medium">Welcome Back</p>
       </div>
 
       <!-- Pesan Error -->

@@ -60,6 +60,7 @@ const fire = () => {
 const props = defineProps<{
   id?: string;
   closeOnClick?: boolean;
+  closeOnClickOutside?: boolean;
   label?: string;
   subtitle?: string;
   width?: string;
@@ -84,9 +85,11 @@ const isCloseOnClick = () => {
 };
 
 onClickOutside(target, (_event) => {
-  setTimeout(() => {
-    closeMenu();
-  });
+  if (props.closeOnClickOutside) {
+    setTimeout(() => {
+      closeMenu();
+    });
+  }
 });
 
 const closeMenu = () => {

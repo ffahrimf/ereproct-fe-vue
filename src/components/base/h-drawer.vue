@@ -1,5 +1,5 @@
 <template>
-  <Transition :duration="450" name="nested">
+  <Transition :duration="450" name="drawer">
     <div
       class="fixed w-full h-screen inset-0 bg-gray-600 bg-opacity-50 top-0 left-0 z-50 flex justify-end items-center transition-side overflow-hidden outer"
       role="dialog"
@@ -29,30 +29,30 @@ const closeDialog = () => {
 </script>
 
 <style>
-.nested-enter-active,
-.nested-leave-active {
+.drawer-enter-active,
+.drawer-leave-active {
   transition: all 0.2s;
 }
-.nested-leave-active {
+.drawer-leave-active {
   transition-delay: 0.2s;
 }
 
-.nested-enter-from,
-.nested-leave-to {
+.drawer-enter-from,
+.drawer-leave-to {
   opacity: 0;
 }
 
-.nested-enter-active .inner,
-.nested-leave-active .inner {
+.drawer-enter-active .inner,
+.drawer-leave-active .inner {
   transition: all 0.2s ease-in-out;
 }
-/* delay enter of nested element */
-.nested-enter-active .inner {
+/* delay enter of drawer element */
+.drawer-enter-active .inner {
   transition-delay: 0.2s;
 }
 
-.nested-enter-from .inner,
-.nested-leave-to .inner {
+.drawer-enter-from .inner,
+.drawer-leave-to .inner {
   transform: translateX(100px);
 
   opacity: 0.001;

@@ -35,45 +35,47 @@
         <hr class="mt-2 mb-2" />
         <ul>
           <li class="flex flex-col text-word text-xs md:text-base">
-            <router-link :to="`auth/login`"
-              ><button class="flex items-center p-2 rounded-lg">
+            <h-nav-menu closeOnClick>
+              <button class="flex items-center p-2 rounded-lg">
                 <h-icon name="login" mode="mdi" color="text-gray-500" /><span
                   class="ms-3"
                   >Masuk</span
                 >
               </button>
-            </router-link>
-            <h-nav-menu closeOnClick>
-              <button class="flex items-center p-2 text-word rounded-lg">
-                <h-icon
-                  name="account-plus"
-                  mode="mdi"
-                  color="text-gray-500"
-                /><span class="ms-3">Daftar</span>
-              </button>
               <template #item>
-                <div class="min-w-[220px] px-2 py-1">
-                  <router-link :to="`auth/register`">
+                <div
+                  class="min-w-[220px] px-2 py-1 text-word text-xs xl:text-sm"
+                >
+                  <router-link :to="`/auth/login`">
                     <div
                       class="flex py-3 px-10 mt-1 justify-center rounded cursor-pointer mb-1 group"
                     >
                       <p
                         class="group-hover:text-secondary transition duration-300 ease-in-out"
                       >
-                        Daftar sebagai pelajar
+                        Masuk sebagai pelajar
                       </p>
                     </div>
                   </router-link>
-                  <router-link :to="`auth/register`"
-                    ><div
+                  <router-link :to="`/auth/register/student`">
+                    <div
                       class="flex py-3 px-10 bg-panel hover:bg-opacity-60 justify-center transition duration-300 ease-in-out rounded-full cursor-pointer mb-1"
                     >
-                      <p>Daftar sebagai mentor</p>
+                      <p>Daftar sebagai pelajar</p>
                     </div>
                   </router-link>
                 </div>
               </template>
             </h-nav-menu>
+            <router-link :to="`/auth/register/mentor`"
+              ><button class="flex items-center p-2 text-word rounded-lg">
+                <h-icon
+                  name="account-tie"
+                  mode="mdi"
+                  color="text-gray-500"
+                /><span class="ms-3">Daftar menjadi Mentor</span>
+              </button></router-link
+            >
           </li>
         </ul>
       </div>

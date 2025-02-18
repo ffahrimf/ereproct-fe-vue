@@ -5,23 +5,27 @@ const superadmin = ref<MenuIF[]>([
   {
     name: "Overview",
     icon: "squares-2X2",
-    path: "/dashboard/overview",
+    path: "/overview",
     sub: [],
     toggle: false
   },
   {
-    name: "Mentor",
-    icon: "account-tie",
+    name: "User",
+    icon: "account",
     "icon-type": "mdi",
-    path: "/dashboard/user/mentor",
-    sub: [],
-    toggle: false
-  },
-  {
-    name: "Student",
-    icon: "academic-cap",
-    path: "/dashboard/user/student",
-    sub: [],
+    permission: "all",
+    path: "",
+    sub: [
+      {
+        name: "Mentor",
+        permission: "all",
+        path: "/user/mentor"
+      },
+      {
+        name: "Student",
+        path: "/user/student"
+      }
+    ],
     toggle: false
   }
 ]);

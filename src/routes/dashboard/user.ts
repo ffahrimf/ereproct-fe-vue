@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 
 const userRoutes: Array<RouteRecordRaw> = [
   {
-    path: "/dashboard/user/mentor",
+    path: "/user/mentor",
     name: "mentor-list",
     component: () =>
       import("../../views/dashboard/user/mentor/mentor-list.vue"),
@@ -13,7 +13,7 @@ const userRoutes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: "/dashboard/user/student",
+    path: "/user/student",
     name: "student-list",
     component: () =>
       import("../../views/dashboard/user/student/student-list.vue"),

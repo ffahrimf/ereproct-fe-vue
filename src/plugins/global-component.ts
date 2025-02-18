@@ -6,7 +6,6 @@ import hMenu from "../components/base/h-menu.vue";
 import hNavMenu from "../components/base/h-nav-menu.vue";
 import hInput from "../components/base/h-input.vue";
 import hSearch from "../components/base/h-search.vue";
-import hDrawer from "../components/base/h-drawer.vue";
 import IconBtn from "../components/base/icon-btn.vue";
 import hArea from "../components/base/h-area.vue";
 import hInputPassword from "../components/base/h-input-password.vue";
@@ -22,6 +21,10 @@ const hOverlay = defineAsyncComponent(
 
 const hDialog = defineAsyncComponent(
   () => import("../components/base/h-dialog.vue")
+);
+
+const hDrawer = defineAsyncComponent(
+  () => import("../components/base/h-drawer.vue")
 );
 
 export const globalcomponent = (app: App): void => {

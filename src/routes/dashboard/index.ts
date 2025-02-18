@@ -3,7 +3,7 @@ import userRoutes from "./user";
 
 const dashboardRoutes: Array<RouteRecordRaw> = [
   {
-    path: "/dashboard",
+    path: "/",
     name: "in-app",
     component: () => import("../../views/dashboard/index.vue"),
     meta: {
@@ -13,7 +13,7 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: "/dashboard/overview",
+        path: "/overview",
         name: "overview",
         component: () =>
           import("../../views/dashboard/overview/main-overview.vue"),
