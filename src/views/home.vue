@@ -94,9 +94,9 @@
 import Sidebar from "../../components/sidebar/sidebar.vue";
 import Drawer from "../../components/icons/drawer.vue";
 import { onMounted, ref } from "vue";
-import { useRemoveStorage } from "../../composables/use-helper";
-import useApi from "../../composables/use-api";
-import { mainStore } from "../../store";
+import { useRemoveStorage } from "../composables/use-helper";
+import useApi from "../composables/use-api";
+import { mainStore } from "../store";
 import { UserIF } from "./user/user.interface";
 import SplashScreen from "../../components/splash-screen.vue";
 import { useRouter } from "vue-router";

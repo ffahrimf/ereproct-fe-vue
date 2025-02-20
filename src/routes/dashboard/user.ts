@@ -4,8 +4,7 @@ const userRoutes: Array<RouteRecordRaw> = [
   {
     path: "/user/mentor",
     name: "mentor-list",
-    component: () =>
-      import("../../views/dashboard/user/mentor/mentor-list.vue"),
+    component: () => import("../../views/user/mentor/mentor-list.vue"),
     meta: {
       requiresAuth: true,
       title: "Mentor List",
@@ -15,8 +14,7 @@ const userRoutes: Array<RouteRecordRaw> = [
   {
     path: "/user/student",
     name: "student-list",
-    component: () =>
-      import("../../views/dashboard/user/student/student-list.vue"),
+    component: () => import("../../views/user/student/student-list.vue"),
     meta: {
       requiresAuth: true,
       title: "Student List",

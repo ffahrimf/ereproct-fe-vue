@@ -5,7 +5,7 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
     name: "in-app",
-    component: () => import("../../views/dashboard/index.vue"),
+    component: () => import("../../views/home.vue"),
     meta: {
       requiresAuth: true,
       title: "Dashboard",
@@ -15,8 +15,7 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
       {
         path: "/overview",
         name: "overview",
-        component: () =>
-          import("../../views/dashboard/overview/main-overview.vue"),
+        component: () => import("../../views/overview/main-overview.vue"),
         meta: {
           requiresAuth: true,
           title: "Overview",
