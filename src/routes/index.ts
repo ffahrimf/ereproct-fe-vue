@@ -8,6 +8,7 @@ import {
 import authRoutes from "./auth";
 import dashboardRoutes from "./dashboard";
 import { mainStore } from "../store";
+import { updateMetaTags } from "./meta";
 
 const routes: Array<RouteRecordRaw> = [...authRoutes, ...dashboardRoutes];
 
@@ -24,30 +25,8 @@ router.beforeEach(
   ) => {
     const store = mainStore();
 
-    // Set Meta Tags (Title & Description)
-    const defaultTitle = "Bermentor - Platform Mentorship";
-    const defaultDescription =
-      "Platform mentorship terbaik untuk semua kalangan.";
-
-    document.title = (to.meta.title as string) || defaultTitle;
-
-    const descriptionElement = document.querySelector(
-      'meta[name="description"]'
-    );
-    if (descriptionElement) {
-      descriptionElement.setAttribute(
-        "content",
-        (to.meta.description as string) || defaultDescription
-      );
-    } else {
-      const metaTag = document.createElement("meta");
-      metaTag.setAttribute("name", "description");
-      metaTag.setAttribute(
-        "content",
-        (to.meta.description as string) || defaultDescription
-      );
-      document.head.appendChild(metaTag);
-    }
+    // Set Meta Tags
+    updateMetaTags(to);
 
     // Auth Guards
     if (to.matched.some((record) => record.meta.requiresAuth)) {
