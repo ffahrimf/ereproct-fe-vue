@@ -7,6 +7,14 @@ const theme = useTheme(env);
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      'inter': ['"Inter"', 'sans-serif'],
+      'inter-tight': ['"Inter Tight"', 'sans-serif'],
+      'dm-sans': ['"DM Sans"', 'sans-serif'],
+      'axiforma-bold': ['"Axiforma-Bold"', 'sans-serif'],
+      'axiforma-xtrabold': ['"Axiforma-XtraBold"', 'sans-serif'],
+
+    },
     extend: {
       zIndex: {
         2: "2",
@@ -17,6 +25,7 @@ module.exports = {
       brightness: {},
       colors: {
         primary: theme.primary,
+        primaryHover: theme.primaryHover,
         secondary: theme.secondary,
         word: theme.word,
         panel: theme.panel,

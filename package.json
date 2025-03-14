@@ -1,5 +1,5 @@
 {
-  "name": "bermentor-fe",
+  "name": "ereproct-fe",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -24,6 +24,7 @@
     "dotenv": "^16.4.5",
     "fast-equals": "^5.0.1",
     "js-cookie": "^3.0.5",
+    "lottie-web": "^5.12.2",
     "mdi-vue": "^3.0.13",
     "pinia": "^2.2.4",
     "v-calendar": "^3.1.2",

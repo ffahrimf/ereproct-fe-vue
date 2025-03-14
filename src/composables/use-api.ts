@@ -17,8 +17,8 @@ class useApi {
     this.instance = axios.create({
       baseURL: `${import.meta.env.VITE_APP_ENV}/api`, // Ambil host dari env
       headers: {
-        Accept: "text/plain",
-      },
+        Accept: "text/plain"
+      }
     });
     this.lang = Cookies.get("lang") ?? "id-ID";
 
@@ -30,7 +30,7 @@ class useApi {
       (error: any) => {
         // errorHandler(error);
         return Promise.reject(error?.response?.data ?? error);
-      },
+      }
     );
   }
 
@@ -58,13 +58,15 @@ class useApi {
     try {
       const token = useDecrypt(Cookies.get("hAS-aTH")); // Ambil token dari cookie
       if (token && data.path !== "auth/login") {
-        this.instance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        this.instance.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${token}`;
       }
-  
+
       const path = addLang(data.path, this.lang); // Tambahkan bahasa ke path
       console.log("POST request path:", path); // Debug
       console.log("POST request body:", data.body); // Debug
-      
+
       const response = await this.instance.post(path, data.body);
       return response.data;
     } catch (error: any) {

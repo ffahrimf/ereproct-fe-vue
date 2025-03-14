@@ -122,7 +122,7 @@ import {
   offset,
   flip,
   shift,
-  hide,
+  hide
 } from "@floating-ui/dom";
 import ProgressLinear from "./progress-linear.vue";
 
@@ -178,7 +178,7 @@ const props = withDefaults(defineProps<PropsIF>(), {
   width: "w-full",
   border: true,
   returnObject: false,
-  sizeValue: "text-sm",
+  sizeValue: "text-sm"
 });
 
 const emit = defineEmits<{
@@ -209,7 +209,7 @@ const setName = computed(() => {
       } else {
         const isExist = props.items.find(
           (el: any) =>
-            el[props.itemValue as keyof typeof el] == props.modelValue,
+            el[props.itemValue as keyof typeof el] == props.modelValue
         );
         if (isExist) {
           name = isExist[props.itemName];
@@ -242,7 +242,7 @@ const closeMenu = () => {
 };
 
 defineExpose({
-  closeMenu,
+  closeMenu
 });
 
 // untuk trigger infinite scroll
@@ -252,7 +252,7 @@ watch(
     if (val === true) {
       emit("bottom");
     }
-  },
+  }
 );
 
 watchEffect(
@@ -262,7 +262,7 @@ watchEffect(
         computePosition(root.value!, target.value!, {
           strategy: "absolute",
           placement: "bottom-start",
-          middleware: [flip(), shift(), offset(5), hide()],
+          middleware: [flip(), shift(), offset(5), hide()]
         }).then(({ x, y, middlewareData }) => {
           if (target.value) {
             target.value.style.left = `${x || 0}px`;
@@ -277,7 +277,7 @@ watchEffect(
       onCleanup(cleanup);
     }
   },
-  { flush: "post" },
+  { flush: "post" }
 );
 
 const selectItem = (item: any) => {

@@ -11,17 +11,22 @@
         v-model="model"
         :type="show ? 'text' : 'password'"
         class="input__form"
+        :class="[size]"
         :placeholder="placeholder"
         data-testid="input"
         v-bind="$attrs"
         @beforeinput="checkOnInput(accept, $event)"
       />
       <button
-        class="z-2 outline-none absolute right-2 top-2.5"
+        class="z-2 outline-none absolute right-2.5 top-2.5"
         type="button"
         @click="show = !show"
       >
-        <h-icon :name="show ? 'eye-slash' : 'eye'" class="text-primary" />
+        <h-icon
+          :name="show ? 'eye-slash' : 'eye'"
+          size="18"
+          class="text-primary"
+        />
       </button>
     </div>
   </div>
@@ -45,6 +50,7 @@ interface PropsIF {
   subtitle?: string | undefined;
   unit?: string | undefined;
   autofocus?: boolean | undefined;
+  size?: string | undefined;
 }
 
 const props: PropsIF = defineProps({
@@ -73,7 +79,12 @@ const props: PropsIF = defineProps({
     type: String,
     default: ""
   },
-  autofocus: Boolean
+  autofocus: Boolean,
+  size: {
+    // Pastikan props size ada di sini
+    type: String,
+    default: "text-xl"
+  }
 });
 
 const emits = defineEmits(["update:modelValue", "clear"]);
@@ -123,7 +134,7 @@ const removeUnaccepted = (value: string) => {
 
 <style lang="postcss" scoped>
 .input__form {
-  @apply py-[10px] px-3 text-sm bg-white relative rounded border border-solid w-full outline-none;
+  @apply py-2 px-3 bg-white relative rounded border border-solid w-full outline-none;
   &:focus {
     @apply border-blue-200 ring-2 ring-blue-300/10 z-[1];
   }

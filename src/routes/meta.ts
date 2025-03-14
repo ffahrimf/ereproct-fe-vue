@@ -2,8 +2,9 @@
 
 import { RouteLocationNormalized } from "vue-router";
 
-const defaultTitle = "Bermentor - Platform Mentorship";
-const defaultDescription = "Platform mentorship terbaik untuk semua kalangan.";
+const defaultTitle = "Ereproct - Laporan Proctoring Psikotes Online";
+const defaultDescription =
+  "Aplikasi laporan proctoring psikotes online yang cepat dan efisien.";
 const baseUrl = window.location.origin;
 
 // Fungsi untuk mengatur meta tag

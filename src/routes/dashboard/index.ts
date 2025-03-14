@@ -8,18 +8,35 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
     component: () => import("../../views/home.vue"),
     meta: {
       requiresAuth: true,
-      title: "Dashboard",
-      description: "Kelola mentor dan student di dashboard Bermentor."
+      title: "Dashboard"
     },
     children: [
       {
-        path: "/overview",
-        name: "overview",
-        component: () => import("../../views/overview/main-overview.vue"),
+        path: "/role",
+        name: "role",
+        component: () => import("../../views/role/role-list.vue"),
         meta: {
           requiresAuth: true,
-          title: "Overview",
-          description: "Tinjau performa mentorship Anda di Overview."
+          title: "Role List"
+        }
+      },
+      {
+        path: "/event-list",
+        name: "event-list",
+        component: () => import("../../views/event/event-list.vue"),
+        meta: {
+          requiresAuth: true,
+          title: "Event List"
+        }
+      },
+      {
+        path: "/violation-master",
+        name: "violation-master",
+        component: () =>
+          import("../../views/violation-master/violation-master-list.vue"),
+        meta: {
+          requiresAuth: true,
+          title: "Violation List"
         }
       },
       ...userRoutes

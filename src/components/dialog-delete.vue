@@ -19,22 +19,22 @@
         >
           <mdicon name="delete" class="text-red-500 icon" size="50" />
         </div>
-        <p class="text-center text-sm mb-6">
+        <p class="text-center text-sm mb-7 mt-2 leading-6 px-3">
           {{ $t("delete_confirmation") }}
         </p>
         <div class="grid grid-cols-2 gap-2 w-full">
           <button
-            class="py-3 w-full font-medium text-slate-900 border-solid border-2 border-gray-200 hover:bg-slate-500/20 active:bg-slate-500/50 rounded-lg outline-none"
+            class="py-2 w-full font-medium text-slate-900 border-solid border-2 border-gray-200 hover:bg-slate-500/20 active:bg-slate-500/50 rounded-lg outline-none"
             @click="emit('update:modelValue', false)"
           >
-            Batal
+            Cancel
           </button>
 
           <button
-            class="py-3 w-full font-medium text-white border-solid border-2 border-red-500 bg-red-500 hover:bg-red-600 active:bg-red-700 rounded-lg outline-none"
+            class="py-2 w-full font-medium text-white border-solid border-2 border-red-500 bg-red-500 hover:bg-red-600 active:bg-red-700 rounded-lg outline-none"
             @click="deleteData"
           >
-            Hapus
+            Delete
           </button>
         </div>
         <div
@@ -58,7 +58,7 @@ import { useToast } from "../composables/use-helper";
 
 const props = defineProps({
   modelValue: Boolean,
-  pocket: null,
+  pocket: null
 });
 const emit = defineEmits(["update:modelValue", "refetch", "success"]);
 const loading = ref(false);
@@ -69,7 +69,7 @@ const deleteData = () => {
   api
     .post({
       path: props.pocket.path,
-      body: {},
+      body: {}
     })
     .then((res) => {
       useToast(res.title ?? "Data Berhasil Terhapus!", "success");
@@ -81,7 +81,6 @@ const deleteData = () => {
     .catch((err) => {
       loading.value = false;
       useToast(err, "error");
-      console.log(err.errors);
     });
 };
 </script>

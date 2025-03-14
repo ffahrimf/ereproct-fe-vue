@@ -1,23 +1,21 @@
 <template>
-  <div style="min-height: calc(100vh - 50px)" class="flex flex-col">
-    <div class="pb-3 px-5 flex justify-between">
-      <div class="flex items-center gap-3">
-        <div class="p-2 bg-white rounded-lg border">
-          <h-icon :name="icon" size="21" class="text-blue-500"></h-icon>
-        </div>
-        <div class="flex-1">
-          <p class="font-bold leading-3 mb-1">{{ title }}</p>
-          <p class="text-slate-500 text-sm leading-3">{{ subtitle }}</p>
-        </div>
-      </div>
+  <div class="flex flex-col mt-[100px]">
+    <div class="absolute top-0 h-[100px] pt-8 ml-10">
+      <slot name="header-searchbar"></slot>
+    </div>
+    <div class="px-10 flex mb-3 items-center justify-between">
+      <p class="font-semibold text-xl">{{ title }}</p>
       <slot name="header-action"></slot>
     </div>
 
-    <div class="bg-white flex-1 border-t" :class="padding ? 'px-5 py-3' : ''">
-      <slot></slot>
-    </div>
-    <div class="border-t py-3 px-5 bg-white">
-      <slot name="footer"></slot>
+    <div class="flex flex-col px-10 mt-2 space-y-1">
+      <div class="bg-white rounded-t-2xl flex-1">
+        <slot></slot>
+      </div>
+
+      <div class="py-3 px-5 bg-white rounded-b-2xl">
+        <slot name="footer"></slot>
+      </div>
     </div>
   </div>
 </template>

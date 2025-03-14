@@ -2,23 +2,41 @@ import { RouteRecordRaw } from "vue-router";
 
 const userRoutes: Array<RouteRecordRaw> = [
   {
-    path: "/user/mentor",
-    name: "mentor-list",
-    component: () => import("../../views/user/mentor/mentor-list.vue"),
+    path: "/user",
+    name: "user-list",
+    component: () => import("../../views/user/user-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "Mentor List",
-      description: "Daftar mentor terbaik tersedia di sini."
+      title: "User List"
     }
   },
   {
-    path: "/user/student",
-    name: "student-list",
-    component: () => import("../../views/user/student/student-list.vue"),
+    path: "/assessment",
+    name: "assesstment-list",
+    component: () =>
+      import("../../views/stakeholder/assessment/assessment-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "Student List",
-      description: "Daftar student terhubung dengan mentor di sini."
+      title: "Assessment List"
+    }
+  },
+  {
+    path: "/proctor",
+    name: "proctor-list",
+    component: () => import("../../views/stakeholder/proctor/proctor-list.vue"),
+    meta: {
+      requiresAuth: true,
+      title: "Proctor List"
+    }
+  },
+  {
+    path: "/research",
+    name: "research-list",
+    component: () =>
+      import("../../views/stakeholder/research/research-list.vue"),
+    meta: {
+      requiresAuth: true,
+      title: "Research List"
     }
   }
 ];

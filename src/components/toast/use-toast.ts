@@ -13,7 +13,7 @@ let optionDefault: ToastOptions = {
   variant: "simple",
   title: "Hello, World!",
   text: "This is a toast message.",
-  position: "top-right",
+  position: "top-right"
 };
 
 export async function toast(option: ToastOptions = {}): Promise<void> {

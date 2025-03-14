@@ -111,10 +111,14 @@ export const useInsertErr = (
   }
 };
 
-export const useToast = (message: string, type: ToastType) => {
+export const useToast = (
+  message: string,
+  type: ToastType,
+  position?: string
+) => {
   toast({
     title: message,
-    position: "top-right",
+    position: position || "top-right",
     type: type,
     variant: "filled"
   });
@@ -125,7 +129,7 @@ export const useRemoveStorage = () => {
   if (token) {
     Cookies.remove("hAS-aTH");
     Cookies.remove("glbl-unq-hr");
-    Cookies.remove("as-bermentor");
+    Cookies.remove("as-ereproct");
     Cookies.remove("id_profile");
     localStorage.clear();
   }

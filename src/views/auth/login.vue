@@ -1,22 +1,26 @@
 <template>
   <div
-    class="w-full min-h-screen bg-[#F3F5F6] flex items-center justify-center"
+    style="
+      background-image: url(/src/assets/img/login-background.svg);
+      background-size: cover;
+    "
+    class="w-full min-h-screen flex items-center justify-center"
   >
     <div
-      class="w-[430px] p-10 rounded-lg shadow bg-white flex items-center flex-col gap-3"
+      class="w-[380px] px-10 py-12 rounded-3xl shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] bg-white flex items-center flex-col gap-3"
     >
-      <div class="p-3 rounded-full">
-        <img
-          src="../../assets/img/landing/logo-text.png"
-          class="h-[50px] mb-5"
-          alt=""
-        />
+      <div class="text-center space-y-2.5">
+        <p class="text-xl font-axiforma-xtrabold">User Login</p>
+
+        <p class="text-[13px]">
+          Hey, Enter your details to get sign in <br />to your account
+        </p>
       </div>
 
       <!-- Pesan Error -->
       <div
         v-if="generalError"
-        class="w-full p-4 mb-4 text-sm text-red-500 bg-red-100 rounded-lg flex items-start gap-2"
+        class="w-full p-4 mb-1.5 text-sm text-red-500 bg-red-100 rounded-lg flex items-center gap-3"
         role="alert"
       >
         <h-icon
@@ -24,47 +28,80 @@
           size="20"
           class="text-red-500 mt-[1px]"
         />
-        <span>{{ generalError }}</span>
+        <span class="text-xs">{{ generalError }}</span>
       </div>
 
       <div class="w-full">
         <form @submit.prevent="login">
           <div class="mb-3">
             <h-input
-              label="Email/Username"
-              v-model="form.email"
-              placeholder="Ketik Email atau Username Anda..."
+              size="text-[13px]"
+              v-model="form.key"
+              placeholder="Enter Username / Email"
             ></h-input>
-            <p
-              class="text-sm text-red-500 whitespace-pre"
-              v-html="errs.email"
-            ></p>
+            <p class="text-xs text-red-500" v-html="errs.key"></p>
           </div>
           <div class="mb-3">
             <h-input-password
-              label="Password"
+              size="text-[13px]"
               v-model="form.password"
-              placeholder="Ketik Password Anda..."
+              placeholder="Passcode"
             ></h-input-password>
-            <p
-              class="text-sm text-red-500 whitespace-pre"
-              v-html="errs.password"
-            ></p>
+            <p class="text-xs text-red-500" v-html="errs.password"></p>
           </div>
-          <h-btn
-            v-if="!loading"
-            class="px-3 py-2 w-full rounded-3xl text-base"
-            type="submit"
+          <p class="text-xs hover:cursor-pointer block font-medium my-5">
+            Having trouble in sign in?
+          </p>
+          <h-btn v-if="!loading" class="py-2.5 w-full rounded-md" type="submit"
             >Login</h-btn
           >
           <h-btn
             v-else
-            class="px-3 py-2 w-full flex items-center justify-center gap-3"
+            class="py-2.5 w-full flex items-center justify-center gap-3"
             type="submit"
           >
             <spinner size="18px" />
             <p>Loading...</p></h-btn
           >
+          <div class="mt-5 flex flex-col gap-5">
+            <p class="flex items-center text-xs">
+              <span class="flex-1 border-t border-gray-300"></span>
+              <span class="px-2">Or Sign in with</span>
+              <span class="flex-1 border-t border-gray-300"></span>
+            </p>
+            <div class="grid grid-cols-3 gap-1">
+              <div class="hover:cursor-pointer">
+                <div
+                  class="flex justify-center items-center border-[1.5px] hover:bg-slate-50 transition duration-300 py-2.5 rounded-lg space-x-1.5"
+                >
+                  <h-icon name="google" mode="mdi" size="16" />
+                  <p class="text-xs font-semibold">Google</p>
+                </div>
+              </div>
+              <div class="hover:cursor-pointer">
+                <div
+                  class="flex justify-center items-center border-[1.5px] hover:bg-slate-50 transition duration-300 py-2.5 rounded-lg space-x-1.5"
+                >
+                  <h-icon name="apple" mode="mdi" size="16" />
+                  <p class="text-xs font-semibold">Apple ID</p>
+                </div>
+              </div>
+              <div class="hover:cursor-pointer">
+                <div
+                  class="flex justify-center items-center border-[1.5px] hover:bg-slate-50 transition duration-300 py-2.5 rounded-lg space-x-1.5"
+                >
+                  <h-icon name="facebook" mode="mdi" size="16" />
+                  <p class="text-xs font-semibold">Facebook</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-xs text-center">
+              Don't have an account?
+              <span class="font-semibold hover:cursor-pointer"
+                >Request Now</span
+              >
+            </p>
+          </div>
         </form>
       </div>
     </div>
@@ -82,12 +119,12 @@ import {
 import useApi from "../../composables/use-api";
 import Cookies from "js-cookie";
 import { useRoute, useRouter } from "vue-router";
-import { mainStore } from "../../store";
 import { RoleIF } from "../../interface/role.interface";
+import { mainStore } from "../../store";
 
 const store = mainStore();
 interface formLogin {
-  email?: string;
+  key?: string;
   password?: string;
 }
 
@@ -96,31 +133,19 @@ interface reqIf {
   body: formLogin;
 }
 
-interface ListDataIF {
-  expires_in: number;
-  token: string;
-  token_type: string;
-  user: UserIF;
-}
-
 interface UserIF {
   id: number;
   username: string;
   name: string;
   email: string;
   email_verified_at?: number;
-  roles: RoleIF[];
+  password: string;
+  role: RoleIF;
 }
-
-interface MetaIF {
-  code: number;
-  message: string;
-  success: string;
-}
-
 interface responseLogin {
-  meta: MetaIF;
-  list_data: ListDataIF;
+  token: string;
+  refresh_token: string;
+  payload: UserIF;
 }
 
 const api = new useApi();
@@ -131,7 +156,7 @@ const route = useRoute();
 const generalError = ref<string>("");
 
 const form = reactive<formLogin>({
-  email: "",
+  key: "",
   password: ""
 });
 
@@ -152,16 +177,16 @@ const login = (): void => {
   api
     .post(req)
     .then((res) => {
-      const response: responseLogin = res;
-      console.log("response login:", response);
+      const response: responseLogin = res.data;
+
       setResponse(response);
       loading.value = false;
-      useToast(res.meta.message, "success");
+      useToast(res.message, "success");
     })
     .catch((err) => {
       loading.value = false;
-      // console.log("respon error:",err.meta.message);
-      const requiredErr = err.meta.message;
+
+      const requiredErr = err.errors;
       if (requiredErr) {
         for (let key in requiredErr) {
           errs[key] =
@@ -170,36 +195,35 @@ const login = (): void => {
               : requiredErr[key][0];
         }
       }
-      generalError.value = requiredErr;
+      generalError.value = err.message;
     });
 };
 
 const setResponse = (res: responseLogin): void => {
-  const token = useEncrypt(res.list_data.token);
+  const token = useEncrypt(res.token);
   if (token) {
     Cookies.set("hAS-aTH", JSON.stringify(token), {
       expires: 7
     });
   }
-  const uid = useEncrypt(`${res.list_data.user.id}`);
+  const uid = useEncrypt(`${res.payload.id}`);
   if (uid) {
     Cookies.set("glbl-unq-hr", JSON.stringify(uid), {
       expires: 7
     });
   }
 
-  const role = useEncrypt(res.list_data.user.roles[0].name);
+  const role = useEncrypt(res.payload.role.name);
   if (role) {
-    Cookies.set("as-bermentor", JSON.stringify(role), {
+    Cookies.set("as-ereproct", JSON.stringify(role), {
       expires: 7
     });
   }
-
-  store.token = res.list_data.token;
-  store.role = res.list_data.user.roles[0].name;
-  store.guid = `${res?.list_data.user.id}`;
+  store.token = res.token;
+  store.role = res.payload.role.name;
+  store.guid = `${res?.payload?.id}`;
   const qp = route.query.redirect ?? null;
   const redirect = Array.isArray(qp) ? qp[0] : qp;
-  router.push(redirect ? redirect : "/dashboard");
+  router.push(redirect ? redirect : "/");
 };
 </script>

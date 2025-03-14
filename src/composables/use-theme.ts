@@ -16,13 +16,15 @@ export const useLighten = (hexColor: string, factor: number): string => {
 };
 
 export const useTheme = () => {
-  const primary: string = "#5083E3";
+  const primary: string = "#4D4DFF";
+  const primaryHover: string = "#3A3AD6";
   const secondary: string = "#FB813F";
   const word: string = "#373D52";
   const panel: string = "#F2F4F7";
 
   const theme = {
     primary: primary,
+    primaryHover: primaryHover,
     secondary: secondary,
     word: word,
     panel: panel,

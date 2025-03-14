@@ -20,7 +20,7 @@ import { computed, nextTick, ref } from "vue";
 import Toast from "./toast.vue";
 
 defineOptions({
-  name: "ToastRoot",
+  name: "ToastRoot"
 });
 
 interface ToastItem {
@@ -41,7 +41,7 @@ const add = async (opt: Partial<ToastItem>) => {
   items.value.push({
     ...opt,
     icon: setIcon(opt.type),
-    _id: Symbol("id"),
+    _id: Symbol("id")
   } as ToastItem);
 
   options.value = opt;
@@ -56,10 +56,16 @@ const setIcon = (type: string): string => {
       icon = "CheckCircleIcon";
       break;
     case "warning":
-      icon = "ExclamationCircleIcon";
+      icon = "ExclamationTriangleIcon";
+      break;
+    case "notification":
+      icon = "BellAlertIcon";
       break;
     case "error":
-      icon = "ExclamationTriangleIcon";
+      icon = "NoSymbolIcon";
+      break;
+    case "info":
+      icon = "InformationCircleIcon";
       break;
     default:
       icon = "ExclamationCircleIcon";
@@ -81,7 +87,7 @@ const remove = (i: number) => {
 };
 
 defineExpose({
-  add,
+  add
 });
 </script>
 

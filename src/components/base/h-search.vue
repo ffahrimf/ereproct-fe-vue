@@ -1,10 +1,9 @@
 <template>
   <div class="relative">
     <h-icon
-      name="magnify"
-      mode="mdi"
-      size="18"
-      class="absolute z-2 text-slate-500 top-2.5 left-2"
+      name="magnifying-glass"
+      size="17"
+      class="absolute z-2 text-slate-500 top-2.5 left-4"
     ></h-icon>
     <input
       type="text"
@@ -17,7 +16,7 @@
       @keyup="searchDebounce"
     />
     <button
-      class="outline-none absolute top-2.5 right-2 z-2"
+      class="outline-none absolute top-2.5 right-4 z-2"
       @click="emit('update:modelValue', ''), emit('search')"
       v-if="model"
     >
@@ -30,7 +29,7 @@
 import { useDebounceFn, useVModel } from "@vueuse/core";
 
 defineOptions({
-  name: "SearchComponents",
+  name: "SearchComponents"
 });
 
 const props = defineProps<{
@@ -54,7 +53,7 @@ const debouncedFn = useDebounceFn(
     emit("search");
   },
   500,
-  { maxWait: 5000 },
+  { maxWait: 5000 }
 );
 
 const searchDebounce = () => {
@@ -82,15 +81,12 @@ const model = useVModel(props);
 }
 
 .input__form {
-  @apply py-2 px-8 text-sm bg-white relative rounded-lg border border-solid w-full outline-none;
-  &:focus {
-    @apply border-slate-200 ring-2 ring-slate-300/20 z-[1];
-  }
+  @apply py-2 px-10 text-sm bg-white relative rounded-3xl w-full outline-none;
   &:hover {
-    @apply border-blue-100 ring-2 ring-blue-300/20 z-[1];
+    @apply border-stone-100 ring-1 ring-stone-300/20 z-[1];
   }
   &:disabled {
-    @apply bg-slate-100;
+    @apply bg-stone-100;
   }
 }
 </style>

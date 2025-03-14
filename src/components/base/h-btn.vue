@@ -44,7 +44,7 @@ const setClass = () => {
   let active = `active:brightness-90 active:scale-95`;
   let shadow = `shadow-md ${props.shadow}/50 hover:shadow-lg hover:${props.shadow}/50 focus:shadow-md focus:${props.shadow}/50 active:shadow-lg active:${props.shadow}/50`;
   let transition = "transition duration-150 ease-in-out";
-  let font = `${props.color} font-medium ${props.textSize} leading-tight`;
+  let font = `${props.color} ${props.textSize} leading-tight`;
 
   let dynamicClass = `${base} ${
     props.flat ? "" : shadow

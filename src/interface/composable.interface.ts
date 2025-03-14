@@ -12,4 +12,9 @@ export interface ErrorMessage {
   ErrorMessage: string;
 }
 
-export type ToastType = "success" | "warning" | "error";
+export type ToastType =
+  | "success"
+  | "warning"
+  | "error"
+  | "notification"
+  | "info";

@@ -27,6 +27,16 @@
   font-family: "Poppins", sans-serif;
 }
 
+@font-face {
+  font-family: 'Axiforma-Bold';
+  src: url(/src/assets/fonts/Kastelov\ \ Axiforma\ Bold.otf);
+}
+
+@font-face {
+  font-family: 'Axiforma-XtraBold';
+  src: url(/src/assets/fonts/Kastelov\ \ Axiforma\ ExtraBold.otf);
+}
+
 .styled-scroll {
   overflow-y: auto;
   scrollbar-width: thin;
@@ -61,9 +71,9 @@
 }
 
 .paginate-buttons {
-  @apply h-[35px] w-[35px] rounded cursor-pointer text-black font-medium text-sm transition-all duration-150 outline-none bg-white;
+  @apply h-[25px] w-[25px] rounded cursor-pointer text-black font-medium text-xs transition-all duration-150 outline-none bg-white;
   &:hover {
-    @apply bg-[#d8d8d8] transition-all duration-150;
+    @apply bg-slate-100 transition-all duration-150;
   }
 }
 

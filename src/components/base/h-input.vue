@@ -14,6 +14,7 @@
         ref="input"
         v-model="model"
         class="input__form"
+        :class="[size]"
         :placeholder="placeholder"
         autocomplete="off"
         data-testid="input"
@@ -42,6 +43,7 @@ interface PropsIF {
   subtitle?: string | undefined;
   unit?: string | undefined;
   autofocus?: boolean | undefined;
+  size?: string | undefined;
 }
 
 const props: PropsIF = defineProps({
@@ -70,7 +72,12 @@ const props: PropsIF = defineProps({
     type: String,
     default: ""
   },
-  autofocus: Boolean
+  autofocus: Boolean,
+  size: {
+    // Pastikan props size ada di sini
+    type: String,
+    default: "text-sm"
+  }
 });
 
 const input = ref();
@@ -127,7 +134,7 @@ onMounted(() => {
 
 <style lang="postcss" scoped>
 .input__form {
-  @apply py-2 px-3 text-sm bg-white relative rounded border border-solid w-full outline-none;
+  @apply py-2 px-3 bg-white relative rounded border border-solid w-full outline-none;
   &:focus {
     @apply border-slate-200 ring-2 ring-slate-300/20 z-[1];
   }

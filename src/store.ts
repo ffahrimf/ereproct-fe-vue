@@ -7,7 +7,7 @@ export const mainStore = defineStore("main", {
   state: (): State => ({
     mode: import.meta.env.MODE,
     token: useDecrypt(Cookies.get("hAS-aTH")),
-    role: useDecrypt(Cookies.get("as-bermentor")),
+    role: useDecrypt(Cookies.get("as-ereproct")),
     guid: useDecrypt(Cookies.get("glbl-unq-hr")),
     manager: useDecrypt(Cookies.get("aprvl-ln")),
     id_table: null,
