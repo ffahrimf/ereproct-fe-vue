@@ -19,11 +19,19 @@ const assessment = ref<MenuIF[]>([
     toggle: false
   },
   {
-    name: "Schedule",
-    icon: "monitor-account",
-    "icon-type": "mdi",
+    name: "Proctoring",
+    icon: "computer-desktop",
     permission: "all",
-    path: "/schedule",
+    path: "/proctoring-schedule",
+    sub: [],
+    toggle: false
+  },
+
+  {
+    name: "Violation",
+    icon: "x-circle",
+    permission: "all",
+    path: "/violation-master",
     sub: [],
     toggle: false
   },
@@ -32,14 +40,6 @@ const assessment = ref<MenuIF[]>([
     icon: "users",
     permission: "all",
     path: "/proctor",
-    sub: [],
-    toggle: false
-  },
-  {
-    name: "Violation",
-    icon: "x-circle",
-    permission: "all",
-    path: "/violation-master",
     sub: [],
     toggle: false
   }

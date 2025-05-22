@@ -8,7 +8,7 @@ const authRoutes: Array<RouteRecordRaw> = [
     meta: {
       requiresVisitor: true,
       title: "User Login",
-      description: "Masuk ke akun Bermentor Anda untuk mulai mentoring."
+      description: "Masuk ke akun Anda"
     }
   }
 ];

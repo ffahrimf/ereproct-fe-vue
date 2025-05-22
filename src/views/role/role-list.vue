@@ -6,7 +6,7 @@
         class="rounded-md px-3 py-2 flex items-center gap-3"
       >
         <h-icon name="plus"></h-icon>
-        <p class="">Add Role</p>
+        <p class="">Tambah Role</p>
       </h-btn>
     </template>
     <div>
@@ -36,7 +36,7 @@
               :key="`item-${i}`"
               class="border-b-[1.5px] last:border-none text-[13px] hover:bg-slate-50"
             >
-              <td class="py-2 px-10 w-0">
+              <td class="py-2 px-7 w-0">
                 <p class="font-medium">
                   {{ item.id }}
                 </p>
@@ -156,7 +156,7 @@ const getRole = (): void => {
   });
 };
 
-const columns: string[] = ["Role Key", "Role Name", ""];
+const columns: string[] = ["Key", "Nama Role", ""];
 
 const currentPage = () => {
   const queryPage = route.query?.page;

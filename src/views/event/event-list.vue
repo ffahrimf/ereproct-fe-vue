@@ -74,7 +74,7 @@
               :key="`item-${i}`"
               class="border-b-[1.5px] last:border-none text-[13px] hover:bg-slate-50"
             >
-              <td class="py-2 px-4">
+              <td class="py-2 px-5">
                 <p class="font-medium">{{ item.code }}</p>
               </td>
               <td class="py-2 px-4">
@@ -108,11 +108,25 @@
                   ]"
                 >
                   <span
+                    v-if="item.status === 'PENDING'"
+                    class="relative flex size-[5px]"
+                  >
+                    <span
+                      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-600 opacity-75"
+                    ></span>
+                    <span
+                      class="relative inline-flex size-[5px] rounded-full bg-amber-700"
+                    ></span>
+                  </span>
+
+                  <span
+                    v-else
                     :class="[
                       'block w-[5px] aspect-square rounded-full',
-                      dotClasses[item.status] || 'bg-gray-700'
+                      dotClasses[item.status]
                     ]"
                   ></span>
+
                   <p class="">
                     {{
                       item.status.charAt(0).toUpperCase() +
@@ -135,11 +149,20 @@
                     </button>
                   </template>
                   <template #item>
-                    <div>
+                    <div class="">
                       <button
-                        class="py-2 px-3 hover:bg-slate-50 text-gray-700 text-xs font-medium rounded flex items-center gap-2 w-full outline-none"
+                        @click="assignProctoring(item)"
+                        class="py-2 pr-3 pl-1.5 text-nowrap hover:bg-slate-50 text-primary text-xs font-medium rounded flex items-center space-x-1.5 w-full outline-none"
                       >
+                        <h-icon name="cursor-arrow-rays" size="14" outline />
                         <p>Assign Proctoring</p>
+                      </button>
+                      <button
+                        @click="unassignProctoring(item)"
+                        class="py-2 pr-3 pl-1.5 text-nowrap hover:bg-slate-50 text-stone-700 text-xs font-medium rounded flex items-center space-x-1.5 w-full outline-none"
+                      >
+                        <h-icon name="x-circle" size="14" outline />
+                        <p>Mark as Unassigned</p>
                       </button>
                     </div>
                   </template>
@@ -176,6 +199,18 @@
         </vue-awesome-paginate>
       </div>
     </template>
+    <AssignProctoring
+      :pocket="pocket"
+      :dialog="dialog.assign"
+      @close="dialog.assign = false"
+      @refetch="getEvent"
+    />
+    <UnassignedProctoring
+      :pocket="pocket"
+      :dialog="dialog.unassign"
+      @close="dialog.unassign = false"
+      @refetch="getEvent"
+    />
   </table-layout>
 </template>
 
@@ -187,6 +222,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useQuery } from "../../composables/use-helper";
 import { EventIF } from "./event.interface";
 import dayjs from "dayjs";
+import UnassignedProctoring from "./unassigned-proctoring.vue";
+import AssignProctoring from "./assign-proctoring.vue";
 
 const SkeletonTable = defineAsyncComponent(
   () => import("../../components/skeleton-table.vue")
@@ -199,18 +236,29 @@ interface QueryIf {
   status: string;
 }
 
+interface DialogIf {
+  unassign: boolean;
+  assign: boolean;
+}
+
 const api = new useApi();
 const router = useRouter();
 const route = useRoute();
 const loading = ref<Boolean>(false);
 const total = ref<number | null>(null);
 const data = ref<EventIF[] | []>([]);
+const pocket = ref<any>(null);
 
 const selectedStatusLabel = computed(() => {
   return (
     status.find((status) => status.value === query.status)?.label ||
     "All status"
   );
+});
+
+const dialog = reactive<DialogIf>({
+  unassign: false,
+  assign: false
 });
 
 const limits: number[] = [8, 20, 50, 100];
@@ -224,20 +272,36 @@ const query = reactive<QueryIf>({
 const status = [
   { label: "All status", value: null },
   { label: "Pending", value: "PENDING" },
-  { label: "Scheduled", value: "SCHEDULED" },
-  { label: "Completed", value: "SUBMITTED" }
+  { label: "Assigned", value: "ASSIGNED" },
+  { label: "Unassigned", value: "UNASSIGNED" }
 ];
 
 const statusClasses = {
   PENDING: "bg-amber-50 text-amber-700",
-  SCHEDULED: "bg-blue-50 text-blue-700",
-  COMPLETED: "bg-green-50 text-green-700"
+  ASSIGNED: "bg-green-50 text-green-700",
+  UNASSIGNED: "bg-stone-50 text-stone-700"
 };
 
 const dotClasses = {
   PENDING: "bg-amber-700",
-  SCHEDULED: "bg-blue-700",
-  COMPLETED: "bg-green-700"
+  ASSIGNED: "bg-green-700",
+  UNASSIGNED: "bg-stone-700"
+};
+
+const assignProctoring = (item: EventIF) => {
+  pocket.value = {
+    value: item,
+    path: `event/update`
+  };
+  dialog.assign = true;
+};
+
+const unassignProctoring = (item: EventIF) => {
+  pocket.value = {
+    value: item,
+    path: `event/update`
+  };
+  dialog.unassign = true;
 };
 
 const paginate = (number: number): any => {
@@ -266,6 +330,16 @@ const getEvent = (): void => {
 
   api.get(`event${q}`).then((res) => {
     const raw: EventIF[] | [] = res.data.items;
+
+    // Sorting agar "SCHEDULED" di atas dan descending berdasarkan event date
+    raw.sort((a, b) => {
+      if (a.status === "PENDING" && b.status !== "PENDING") return -1;
+      if (a.status !== "PENDING" && b.status === "PENDING") return 1;
+
+      // Descending berdasarkan tanggal event
+      return dayjs(b.date).valueOf() - dayjs(a.date).valueOf();
+    });
+
     data.value = raw;
     total.value = res.data.total;
     loading.value = false;
@@ -273,13 +347,13 @@ const getEvent = (): void => {
 };
 
 const columns: string[] = [
-  "Code",
-  "Client",
-  "Participants",
-  "Date",
-  "Start",
-  "Status",
-  "Finish"
+  "Kode",
+  "Klien",
+  "Jumlah Peserta",
+  "Tanggal",
+  "Mulai",
+  "Selesai",
+  "Status"
 ];
 
 const currentPage = () => {

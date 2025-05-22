@@ -18,6 +18,7 @@
         :placeholder="placeholder"
         autocomplete="off"
         data-testid="input"
+        :disabled="disabled"
         v-bind="$attrs"
         @beforeinput="checkOnInput(accept, $event)"
       />
@@ -44,6 +45,7 @@ interface PropsIF {
   unit?: string | undefined;
   autofocus?: boolean | undefined;
   size?: string | undefined;
+  disabled?: boolean | undefined;
 }
 
 const props: PropsIF = defineProps({
@@ -77,6 +79,10 @@ const props: PropsIF = defineProps({
     // Pastikan props size ada di sini
     type: String,
     default: "text-sm"
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -139,10 +145,10 @@ onMounted(() => {
     @apply border-slate-200 ring-2 ring-slate-300/20 z-[1];
   }
   &:hover {
-    @apply border-blue-100 ring-2 ring-blue-300/20 z-[1];
+    @apply border-indigo-100 ring-2 ring-primary/20 z-[1];
   }
   &:disabled {
-    @apply bg-slate-100;
+    @apply bg-stone-100;
   }
 }
 </style>

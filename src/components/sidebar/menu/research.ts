@@ -9,6 +9,14 @@ const research = ref<MenuIF[]>([
     path: "/",
     sub: [],
     toggle: false
+  },
+  {
+    name: "Report",
+    icon: "clipboard-document-check",
+    permission: "all",
+    path: "/report",
+    sub: [],
+    toggle: false
   }
 ]);
 

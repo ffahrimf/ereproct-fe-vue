@@ -6,7 +6,7 @@
         class="rounded-md px-3 py-2 flex items-center gap-3"
       >
         <h-icon name="plus"></h-icon>
-        <p class="">Add Violation</p>
+        <p class="">Tambah Pelanggaran</p>
       </h-btn>
     </template>
     <div>
@@ -38,10 +38,23 @@
             >
               <td class="py-2 px-5 w-0">
                 <div
+                  class="text-xs px-3 py-1 font-medium inline-flex rounded-lg"
+                  :class="
+                    item.level === 'Berat'
+                      ? 'bg-red-50 text-red-500'
+                      : 'bg-yellow-50 text-yellow-500'
+                  "
+                >
+                  <p>{{ item.level }}</p>
+                </div>
+              </td>
+
+              <td class="py-2 px-4 w-0">
+                <div
                   @click="copyText(item.color)"
                   class="flex cursor-pointer active:scale-95 space-x-2 items-center"
                 >
-                  <p class="font-medium">
+                  <p class="text-stone-500">
                     {{ item.color }}
                   </p>
                   <span
@@ -52,18 +65,18 @@
               </td>
               <td class="py-2 px-4">
                 <div
-                  class="text-xs px-3 py-1.5 font-medium inline-flex rounded-lg bg-green-50"
+                  class="text-xs px-3 py-1.5 font-medium inline-flex rounded-lg"
                   :style="{
                     color: item.color,
                     backgroundColor: item.sub_color
                   }"
                 >
                   <p class="">
-                    {{ item.type }}
+                    {{ item.condition }}
                   </p>
                 </div>
               </td>
-              <td class="py-2 px-5">
+              <td class="py-2 px-4">
                 <h-menu arrow closeOnClick>
                   <template #default="{ isOpen }">
                     <button
@@ -82,6 +95,12 @@
                         class="py-2 px-3 hover:bg-slate-50 text-gray-700 text-xs font-medium rounded flex items-center gap-2 w-full outline-none"
                       >
                         <p>Update</p>
+                      </button>
+                      <button
+                        @click="onDelete(item)"
+                        class="py-2 px-3 hover:bg-slate-50 text-red-500 text-xs font-medium rounded flex items-center gap-2 w-full outline-none"
+                      >
+                        <p>Delete</p>
                       </button>
                     </div>
                   </template>
@@ -124,6 +143,12 @@
       @close="dialog.create = false"
       @refetch="getViolationMaster"
     />
+    <DialogDelete
+      :pocket="pocket"
+      v-model="dialog.delete"
+      @close="dialog.delete = false"
+      @refetch="getViolationMaster"
+    />
   </table-layout>
 </template>
 
@@ -135,6 +160,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useQuery, useToast } from "../../composables/use-helper";
 import CreateViolationMaster from "./create-violation.vue";
 import { ViolationMasterIF } from "./violation-master.interface";
+import DialogDelete from "../../components/dialog-delete.vue";
 
 const SkeletonTable = defineAsyncComponent(
   () => import("../../components/skeleton-table.vue")
@@ -183,7 +209,15 @@ const onUpdate = (item: ViolationMasterIF) => {
   dialog.create = true;
 };
 
-const columns: string[] = ["Color", "Condition", "Action"];
+const onDelete = (item: ViolationMasterIF) => {
+  pocket.value = {
+    path: `violation/delete/${item.id}`
+  };
+
+  dialog.delete = true;
+};
+
+const columns: string[] = ["Level", "Warna", "Kondisi", "Aksi"];
 
 const currentPage = () => {
   const queryPage = route.query?.page;
@@ -201,10 +235,12 @@ const copyText = async (text: any) => {
 
 interface DialogIf {
   create: boolean;
+  delete: boolean;
 }
 
 const dialog = reactive<DialogIf>({
-  create: false
+  create: false,
+  delete: false
 });
 
 onMounted(() => {

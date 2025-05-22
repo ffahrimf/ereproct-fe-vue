@@ -80,7 +80,7 @@ const deleteData = () => {
     })
     .catch((err) => {
       loading.value = false;
-      useToast(err, "error");
+      useToast(err.message, "error");
     });
 };
 </script>

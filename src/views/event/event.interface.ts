@@ -8,7 +8,7 @@ export interface EventIF {
   date: string;
   start_time: string;
   finish_time: string;
-  status: "PENDING" | "SCHEDULED" | "COMPLETED";
+  status: "PENDING" | "ASSIGNED" | "UNASSIGNED";
   eventDetails: EventDetailIF[];
 }
 

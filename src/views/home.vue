@@ -93,6 +93,7 @@ const getProfile = () => {
   api.get(`user?id=${store.guid}`).then((res) => {
     const raw: UserIF | null = res.data.items[0] ?? null;
     store.profile = raw;
+    // console.log(store.profile);
     store.splash = false;
   });
 };

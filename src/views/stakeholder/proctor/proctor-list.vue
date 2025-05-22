@@ -51,7 +51,7 @@
           class="rounded-md px-3 py-2 flex items-center gap-3"
         >
           <h-icon name="plus"></h-icon>
-          <p class="">Add Proctor</p>
+          <p class="">Tambah Proctor</p>
         </h-btn>
       </div>
     </template>
@@ -336,12 +336,12 @@ const changeStatus = (item: ProctorIF) => {
 };
 
 const columns: string[] = [
-  "Name",
+  "Nama",
   "Username",
   "Email",
-  "Gender",
+  "Jenis Kelamin",
   "Status",
-  "Action"
+  "Aksi"
 ];
 
 const currentPage = () => {

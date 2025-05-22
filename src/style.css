@@ -100,3 +100,17 @@
     radial-gradient(at 100% 0%, hsla(283, 41%, 47%, 0.2) 0px, transparent 40%);
   background-attachment: fixed;
 }
+
+
+.accordion-enter-active,
+.accordion-leave-active {
+  transition: all 0.3s ease;
+}
+
+.accordion-enter-from,
+.accordion-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+

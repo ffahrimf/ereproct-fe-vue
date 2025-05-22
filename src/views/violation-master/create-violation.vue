@@ -2,23 +2,49 @@
   <h-dialog :dialog="dialog">
     <div
       class="bg-white rounded-md shadow-lg w-[500px] flex flex-col relative"
-      :class="`${form.type && form.color ? 'h-[67vh]' : 'h-[55vh]'}`"
+      :class="`${form.condition && form.color ? 'h-[71vh]' : 'h-[60vh]'}`"
     >
       <div class="py-2 px-6 border-b flex items-center justify-between">
         <p class="font-medium text-slate-700 text-sm">Create Violation</p>
         <icon-btn icon="x-mark" @click="emit('close')" />
       </div>
       <div class="py-3 px-6 flex-1 styled-scroll">
+        <div class="mb-3 grid grid-cols-2 gap-5">
+          <div>
+            <h-select
+              label="Level"
+              placeholder="Pilih Level"
+              :items="[
+                { label: 'Berat', value: 'Berat' },
+                { label: 'Sedang', value: 'Sedang' }
+              ]"
+              itemName="label"
+              itemValue="value"
+              v-model="form.level"
+            ></h-select>
+            <h-errs :message="errs.level" />
+          </div>
+          <div>
+            <h-label label="Color" class=""></h-label>
+            <input
+              type="color"
+              v-model="form.color"
+              class="w-full h-9 -mt-1 p-1 bg-white border border-gray-300 rounded-md cursor-pointer"
+            />
+            <h-errs :message="errs.color" />
+          </div>
+        </div>
         <div class="mb-1.5">
           <h-area
+            row="3"
             label="Pelanggaran"
             placeholder="Ketik Kondisi Peserta..."
-            v-model="form.type"
+            v-model="form.condition"
           ></h-area>
 
-          <h-errs :message="errs.type" />
+          <h-errs :message="errs.condition" />
         </div>
-        <div v-if="form.type && form.color" class="mb-3">
+        <div v-if="form.condition && form.color" class="mb-3">
           <h-label label="Preview" class=""></h-label>
           <div
             class="text-xs px-3 py-1.5 font-medium inline-flex rounded-lg bg-green-50"
@@ -28,18 +54,9 @@
             }"
           >
             <p class="">
-              {{ form.type }}
+              {{ form.condition }}
             </p>
           </div>
-        </div>
-        <div class="mb-3">
-          <h-label label="Color" class=""></h-label>
-          <input
-            type="color"
-            v-model="form.color"
-            class="w-full h-10 p-0 border border-gray-300 rounded-md cursor-pointer"
-          />
-          <h-errs :message="errs.color" />
         </div>
       </div>
       <div class="py-3 px-6 border-t flex items-center justify-end">
@@ -65,7 +82,8 @@ import { GenericObject } from "../../interface/composable.interface";
 
 interface CreateViolationMaster {
   id?: string;
-  type: string;
+  level: string;
+  condition: string;
   color: string;
   sub_color: string;
   status: string;
@@ -82,14 +100,16 @@ const api = new useApi();
 
 const form = reactive<CreateViolationMaster>({
   id: "",
-  type: "",
+  level: "",
+  condition: "",
   color: "",
   sub_color: "",
   status: "ACTIVE"
 });
 
 const errs = reactive<GenericObject>({
-  type: "",
+  level: "",
+  condition: "",
   color: ""
 });
 
@@ -150,10 +170,12 @@ function lightenColor(hex: string, percent: number): string {
 
 const resetForm = () => {
   form.id = "";
-  form.type = "";
+  form.level = "";
+  form.condition = "";
   form.color = "";
   form.sub_color = "";
-  errs.type = "";
+  errs.level = "";
+  errs.condition = "";
   errs.color = "";
 };
 
@@ -162,7 +184,8 @@ watch(
   (pocket) => {
     if (pocket) {
       form.id = pocket.id;
-      form.type = pocket.type;
+      form.level = pocket.level;
+      form.condition = pocket.condition;
       form.color = pocket.color;
       form.sub_color = pocket.sub_color;
     } else {

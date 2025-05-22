@@ -12,10 +12,17 @@ const proctor = ref<MenuIF[]>([
   },
   {
     name: "Schedule",
-    icon: "monitor-account",
-    "icon-type": "mdi",
+    icon: "computer-desktop",
     permission: "all",
-    path: "/schedule",
+    path: "/proctoring-schedule",
+    sub: [],
+    toggle: false
+  },
+  {
+    name: "Report",
+    icon: "clipboard-document-check",
+    permission: "all",
+    path: "/report",
     sub: [],
     toggle: false
   }

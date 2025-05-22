@@ -4,9 +4,18 @@
       <img src="../../assets/img/logo-text.png" class="h-[30px]" alt="" />
     </div>
     <div class="flex flex-col h-full">
-      <div class="flex-1 px-10 styled-scroll">
+      <div class="flex-1 pl-10 styled-scroll">
         <template v-if="menu.length">
-          <div v-for="(item, i) in menu" :key="`menu-${i}`">
+          <div
+            v-for="(item, i) in menu"
+            :key="`menu-${i}`"
+            class="pr-10 relative"
+          >
+            <span
+              v-if="isMenuActive(item)"
+              class="aspect-square w-1 rounded-xl bg-primary absolute right-0 h-full"
+            ></span>
+
             <div class="overflow-hidden" v-if="item.sub.length">
               <button
                 role="button"
@@ -115,6 +124,14 @@ const singleMenu = (item: MenuIF): string => {
       ? "text-white bg-primary hover:bg-primaryHover"
       : "hover:bg-slate-100 text-black";
   return styleRes;
+};
+
+const isMenuActive = (item: MenuIF): boolean => {
+  return (
+    item.toggle ||
+    route.path === item.path ||
+    item.sub.some((sub) => sub.path === route.path)
+  );
 };
 
 interface DialogIf {

@@ -64,13 +64,13 @@ class useApi {
       }
 
       const path = addLang(data.path, this.lang); // Tambahkan bahasa ke path
-      console.log("POST request path:", path); // Debug
-      console.log("POST request body:", data.body); // Debug
+      console.log("POST Request Path:", path); // Debug
+      console.log("POST Request Body:", data.body); // Debug
 
       const response = await this.instance.post(path, data.body);
       return response.data;
     } catch (error: any) {
-      console.error("Error in POST request:", error); // Debug tambahan
+      console.error("Error in POST Request:", error); // Debug tambahan
       throw error?.response?.data ?? error;
     }
   }

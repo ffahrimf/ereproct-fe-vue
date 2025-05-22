@@ -3,6 +3,7 @@ import "./style.css";
 import App from "./App.vue";
 import router from "./routes";
 import mdiVue from "mdi-vue/v3";
+import "preline/preline";
 import * as mdijs from "@mdi/js";
 import { createPinia } from "pinia";
 import { globalcomponent } from "./plugins/global-component";

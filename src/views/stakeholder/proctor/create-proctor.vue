@@ -193,11 +193,7 @@ const errs = reactive<GenericObject>({
   username: "",
   password: "",
   email: "",
-  phone_number: "",
-  birth_date: "",
-  gender: "",
-  status: "",
-  photo: ""
+  phone_number: ""
 });
 
 const resetPhotoPreview = () => {
@@ -223,13 +219,16 @@ const resetForm = () => {
   form.phone_number = "";
   form.gender = "";
   form.password = "";
-  errs.name = "";
+  form.birth_date = null;
   errs.username = "";
+  errs.name = "";
   errs.email = "";
   errs.phone_number = "";
   errs.birth_date = "";
   errs.gender = "";
+  errs.password = "";
   form.photo = null;
+  resetPhotoPreview();
 };
 
 const postData = (): void => {

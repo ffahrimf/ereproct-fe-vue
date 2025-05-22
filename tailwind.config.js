@@ -5,7 +5,7 @@ import { useTheme } from "./src/composables/use-theme";
 const env = process.env.VITE_APP_ENV;
 const theme = useTheme(env);
 module.exports = {
-  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}", "./node_modules/preline/dist/*.js"],
   theme: {
     fontFamily: {
       'inter': ['"Inter"', 'sans-serif'],

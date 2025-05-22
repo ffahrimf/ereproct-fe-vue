@@ -7,7 +7,8 @@ const userRoutes: Array<RouteRecordRaw> = [
     component: () => import("../../views/user/user-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "User List"
+      title: "User List",
+      allowedRoles: ["SUPERADMIN"]
     }
   },
   {
@@ -17,7 +18,8 @@ const userRoutes: Array<RouteRecordRaw> = [
       import("../../views/stakeholder/assessment/assessment-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "Assessment List"
+      title: "Assessment List",
+      allowedRoles: ["SUPERADMIN"]
     }
   },
   {
@@ -26,7 +28,8 @@ const userRoutes: Array<RouteRecordRaw> = [
     component: () => import("../../views/stakeholder/proctor/proctor-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "Proctor List"
+      title: "Proctor List",
+      allowedRoles: ["ASSESSMENT"]
     }
   },
   {
@@ -36,7 +39,8 @@ const userRoutes: Array<RouteRecordRaw> = [
       import("../../views/stakeholder/research/research-list.vue"),
     meta: {
       requiresAuth: true,
-      title: "Research List"
+      title: "Research List",
+      allowedRoles: ["SUPERADMIN"]
     }
   }
 ];

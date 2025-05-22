@@ -51,7 +51,7 @@
           class="rounded-md px-3 py-2 flex items-center gap-3"
         >
           <h-icon name="plus"></h-icon>
-          <p class="">Add New User</p>
+          <p class="">Tambah User</p>
         </h-btn>
       </div>
     </template>
@@ -306,7 +306,7 @@ const getUser = (): void => {
   });
 };
 
-const columns: string[] = ["Name", "Username", "Email", "Role", "Action"];
+const columns: string[] = ["Nama", "Username", "Email", "Role", "Aksi"];
 
 const currentPage = () => {
   const queryPage = route.query?.page;

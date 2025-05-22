@@ -1,7 +1,7 @@
 <template>
   <h-dialog :dialog="dialog">
     <div
-      class="bg-white rounded-md shadow-lg w-[900px] flex flex-col h-[76vh] relative"
+      class="bg-white rounded-md shadow-lg w-[900px] flex flex-col h-[80vh] relative"
     >
       <div class="py-2 px-6 border-b flex items-center justify-between">
         <p class="font-medium text-slate-700 text-sm">Create research</p>
@@ -223,13 +223,16 @@ const resetForm = () => {
   form.phone_number = "";
   form.gender = "";
   form.password = "";
-  errs.name = "";
+  form.birth_date = null;
   errs.username = "";
+  errs.name = "";
   errs.email = "";
   errs.phone_number = "";
   errs.birth_date = "";
   errs.gender = "";
+  errs.password = "";
   form.photo = null;
+  resetPhotoPreview();
 };
 
 const postData = (): void => {
