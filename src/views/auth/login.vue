@@ -178,7 +178,6 @@ const login = (): void => {
     .post(req)
     .then((res) => {
       const response: responseLogin = res.data;
-
       setResponse(response);
       loading.value = false;
       useToast(res.message, "success");
@@ -206,6 +205,14 @@ const setResponse = (res: responseLogin): void => {
       expires: 7
     });
   }
+
+  const refreshToken = useEncrypt(res.refresh_token);
+  if (refreshToken) {
+    Cookies.set("hAS-rTH", JSON.stringify(refreshToken), {
+      expires: 30
+    });
+  }
+
   const uid = useEncrypt(`${res.payload.id}`);
   if (uid) {
     Cookies.set("glbl-unq-hr", JSON.stringify(uid), {

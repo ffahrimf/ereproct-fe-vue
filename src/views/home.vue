@@ -47,11 +47,17 @@
                 ></h-icon></button></template
           ></h-menu>
           <div class="flex items-center space-x-2">
-            <h-avatar size="35" />
+            <h-avatar :src="store.profile?.photo" size="35" />
             <div class="flex flex-col">
-              <p class="text-sm font-medium">John Doe</p>
+              <p class="text-sm font-medium">
+                {{ store.profile?.name }}
+              </p>
               <p class="text-[10px] text-gray-700 font-light">
-                johndoe@gmail.com
+                {{ store.profile?.email }} |
+                {{
+                  store.profile?.role.name.charAt(0).toUpperCase() +
+                  store.profile?.role.name.slice(1).toLowerCase()
+                }}
               </p>
             </div>
           </div>
@@ -88,7 +94,7 @@ const expand = ref<boolean>(true);
 
 const api = new useApi();
 const store = mainStore();
-const getProfile = () => {
+const getUser = () => {
   store.splash = true;
   api.get(`user?id=${store.guid}`).then((res) => {
     const raw: UserIF | null = res.data.items[0] ?? null;
@@ -99,6 +105,6 @@ const getProfile = () => {
 };
 
 onMounted(() => {
-  getProfile();
+  getUser();
 });
 </script>

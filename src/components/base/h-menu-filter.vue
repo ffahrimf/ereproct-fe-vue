@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { ref, watchEffect, watch } from "vue";
-import { onClickOutside, useElementSize, useScroll } from "@vueuse/core";
+import { useElementSize, useScroll } from "@vueuse/core";
 import {
   autoUpdate,
   computePosition,
@@ -83,11 +83,11 @@ const isCloseOnClick = () => {
   }
 };
 
-onClickOutside(target, (_event) => {
-  setTimeout(() => {
-    closeMenu();
-  });
-});
+// onClickOutside(target, (_event) => {
+//   setTimeout(() => {
+//     closeMenu();
+//   });
+// });
 
 const closeMenu = () => {
   isOpen.value = false;

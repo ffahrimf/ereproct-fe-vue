@@ -74,7 +74,7 @@ interface ChangeProctor {
   id?: string;
   event_id: number | null;
   proctor_id: number | null;
-  number_of_participants: number;
+  // number_of_participants: number;
   number_of_participants_logged_in: number;
   number_of_participants_only_logged_in: number;
   // number_of_participants_not_logged_in: number;
@@ -109,7 +109,7 @@ const form = reactive<ChangeProctor>({
   id: "",
   event_id: props.pocket?.value?.id ?? null,
   proctor_id: null,
-  number_of_participants: 0,
+  // number_of_participants: 0,
   number_of_participants_logged_in: 0,
   number_of_participants_only_logged_in: 0,
   // number_of_participants_not_logged_in: 0,
@@ -130,7 +130,7 @@ const onProctorChange = () => {
 const resetForm = () => {
   form.event_id = null;
   form.proctor_id = null;
-  form.number_of_participants = 0;
+  // form.number_of_participants = 0;
   form.number_of_participants_logged_in = 0;
   form.number_of_participants_only_logged_in = 0;
   // form.number_of_participants_not_logged_in = 0;
@@ -189,7 +189,7 @@ watch(
       form.event_id = newVal.event.id;
       proctor.selected = newVal.proctor;
       form.proctor_id = newVal.proctor.id;
-      form.number_of_participants = newVal.number_of_participants;
+      // form.number_of_participants = newVal.number_of_participants;
       form.number_of_participants_logged_in =
         newVal.number_of_participants_logged_in;
       form.number_of_participants_only_logged_in =

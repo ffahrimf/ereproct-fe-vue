@@ -6,7 +6,7 @@ export interface SetupReport {
   id: number | null;
   event_id: number | null;
   proctor_id: number | null;
-  number_of_participants: number;
+  // number_of_participants: number;
   number_of_participants_logged_in: number;
   number_of_participants_only_logged_in: number;
   // number_of_participants_not_logged_in: number;
@@ -23,7 +23,7 @@ export const form = reactive<Partial<SetupReport>>({
   id: null,
   event_id: null,
   proctor_id: null,
-  number_of_participants: 0,
+  // number_of_participants: 0,
   number_of_participants_logged_in: 0,
   number_of_participants_only_logged_in: 0,
   // number_of_participants_not_logged_in: 0,
@@ -34,10 +34,10 @@ export const form = reactive<Partial<SetupReport>>({
 });
 
 export const resetForm = () => {
-  form.id = null;
+  // form.id = null;
   form.event_id = null;
   form.proctor_id = null;
-  form.number_of_participants = 0;
+  // form.number_of_participants = 0;
   form.number_of_participants_logged_in = 0;
   form.number_of_participants_only_logged_in = 0;
   // form.number_of_participants_not_logged_in = 0;

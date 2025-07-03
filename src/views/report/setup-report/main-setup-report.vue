@@ -95,7 +95,7 @@
           </div>
         </div>
 
-        <ViolationIndication />
+        <Violations />
       </div>
 
       <div class="flex flex-col gap-3 w-5/12">
@@ -106,11 +106,13 @@
   </div>
   <div class="flex items-center gap-2 justify-end px-10">
     <button
+      @click="fetchData"
       class="p-2 text-xs gap-1 font-medium rounded-lg active:scale-95 bg-slate-200"
     >
       <h-icon name="arrow-path" size="16" />
     </button>
     <button
+      @click="console.log(form)"
       class="px-3 py-2 text-xs font-medium rounded-lg bg-primary text-white active:scale-95"
     >
       Submit Report
@@ -126,8 +128,8 @@ import { useRoute } from "vue-router";
 import { ReportIF } from "../report.interface";
 import dayjs from "dayjs";
 import ParticipantNotLoggedIn from "./participant-not-logged-in.vue";
-import Issues from "./issues.vue";
-import ViolationIndication from "./violation-indication.vue";
+import Issues from "./issues/issues.vue";
+import Violations from "./violation/violations.vue";
 
 const route = useRoute();
 const code = ref((route.query.code as string) ?? "");
@@ -148,7 +150,6 @@ const fetchData = async (): Promise<void> => {
       form.id = item.id ?? null;
       form.event_id = item.event?.id ?? null;
       form.proctor_id = item.proctor?.id ?? null;
-      form.number_of_participants = item.number_of_participants ?? 0;
       form.number_of_participants_logged_in =
         item.number_of_participants_logged_in ?? 0;
       form.number_of_participants_only_logged_in =

@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="flex items-center max-[768px]:block mb-1">
-      <label class="text-sm font-medium text-slate-700" :for="id">{{
+      <label :class="['font-medium text-slate-700', labelSize]" :for="id">{{
         label
       }}</label>
-      <p class="text-[10px] text-gray-500 italic ml-1" v-if="subtitle">
+      <p v-if="subtitle" :class="['text-gray-500 italic ml-1', subtitleSize]">
         {{ subtitle }}
       </p>
     </div>
     <textarea
       ref="input"
       v-model="model"
-      class="input__form"
+      :class="['input__form', inputSize]"
       :placeholder="placeholder"
       v-bind="$attrs"
       :rows="row"
@@ -27,27 +27,43 @@ defineOptions({
   inheritAttrs: false
 });
 
-const props = defineProps<{
-  id?: string;
-  modelValue?: string | number;
-  type?: string;
-  placeholder?: string;
-  row?: string;
-  label?: string;
-  subtitle?: string;
-}>();
-
-// const emits = defineEmits<{
-//   (event: "update:modelValue", value: string | number): void;
-//   (event: "clear"): void;
-// }>();
+// `defineProps` diubah menggunakan `withDefaults` untuk ngasih nilai default
+const props = withDefaults(
+  defineProps<{
+    id?: string;
+    modelValue?: string | number;
+    type?: string;
+    placeholder?: string;
+    row?: string;
+    label?: string;
+    subtitle?: string;
+    // Props baru untuk custom text size
+    labelSize?: string;
+    subtitleSize?: string;
+    inputSize?: string;
+  }>(),
+  {
+    // Nilai default buat props text size
+    id: undefined,
+    modelValue: "",
+    type: "text",
+    placeholder: "",
+    row: "4",
+    label: "",
+    subtitle: "",
+    labelSize: "text-sm",
+    subtitleSize: "text-[10px]",
+    inputSize: "text-sm"
+  }
+);
 
 const model = useVModel(props);
 </script>
 
 <style lang="postcss" scoped>
 .input__form {
-  @apply py-[10px] px-3 text-sm bg-white relative rounded border border-solid w-full outline-none;
+  /* `text-sm` dihapus dari sini karena udah di-handle sama props */
+  @apply py-[10px] px-3 bg-white relative rounded border border-solid w-full outline-none;
   &:focus {
     @apply border-slate-200 ring-2 ring-slate-300/20 z-[1];
   }

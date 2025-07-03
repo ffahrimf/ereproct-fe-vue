@@ -6,7 +6,7 @@ export interface ReportIF {
   uuid: string;
   event: EventIF;
   proctor: ProctorIF;
-  number_of_participants: number;
+  // number_of_participants: number;
   number_of_participants_logged_in: number;
   number_of_participants_only_logged_in: number;
   // number_of_participants_not_logged_in: number;

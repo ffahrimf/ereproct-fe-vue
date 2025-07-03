@@ -126,7 +126,7 @@
                 </td>
 
                 <td class="py-2 px-4">
-                  <div class="flex">
+                  <div v-if="item.status === 'ON DUTY'" class="flex">
                     <button
                       class="active:scale-95 text-stone-500 hover:text-primary"
                     >

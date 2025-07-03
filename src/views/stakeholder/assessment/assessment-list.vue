@@ -156,12 +156,6 @@
                   <template #item>
                     <div>
                       <button
-                        class="py-2 px-3 hover:bg-blue-50 rounded flex items-center gap-2 text-primary w-full outline-none"
-                      >
-                        <h-icon name="pencil" size="18" />
-                        <p>Update</p>
-                      </button>
-                      <button
                         @click="onChangePassword(item)"
                         class="py-2 px-3 hover:bg-slate-100 rounded flex items-center gap-2 text-primary outline-none"
                       >

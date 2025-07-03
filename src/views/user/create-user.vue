@@ -1,7 +1,7 @@
 <template>
   <h-dialog :dialog="dialog">
     <div
-      class="bg-white rounded-md shadow-lg w-[500px] flex flex-col h-[86vh] relative"
+      class="bg-white rounded-md shadow-lg w-[500px] flex flex-col min-h-[90vh] relative"
     >
       <div class="py-2 px-6 border-b flex items-center justify-between">
         <p class="font-medium text-slate-700 text-sm">Create User</p>

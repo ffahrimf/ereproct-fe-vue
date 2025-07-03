@@ -1,3 +1,6 @@
+import { ReportIF } from "../views/report/report.interface";
+import { ViolationMasterIF } from "../views/violation-master/violation-master.interface";
+
 export interface ProvinceIF {
   id: number;
   uuid: string;
@@ -34,4 +37,33 @@ export interface ParticipantIF {
   name: string;
   email: string;
   phone_no: string;
+}
+
+export interface IssueIF {
+  id: number;
+  uuid: string;
+  report: ReportIF;
+  participant: ParticipantIF;
+  issue_type: string;
+  issue_action: string;
+  participant_issue_response: string;
+  remarks: string;
+}
+
+export interface ReportViolationIF {
+  id: number;
+  uuid: string;
+  report: ReportIF;
+  participant: ParticipantIF;
+  violation_action: string;
+  participant_violation_response: string;
+  remarks: string;
+}
+
+export interface ReportViolationDetailIF {
+  id: number;
+  uuid: string;
+  report_violation: ReportViolationIF;
+  violation: ViolationMasterIF;
+  period: number;
 }

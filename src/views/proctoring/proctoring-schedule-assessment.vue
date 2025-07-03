@@ -95,12 +95,7 @@
               </td>
               <td class="py-2 px-4">
                 <p class="text-stone-500">
-                  {{ item.event.start_time }}
-                </p>
-              </td>
-              <td class="py-2 px-4">
-                <p class="text-stone-500">
-                  {{ item.event.finish_time }}
+                  {{ item.event.start_time }} - {{ item.event.finish_time }}
                 </p>
               </td>
               <td class="py-2 px-4">
@@ -347,8 +342,7 @@ const columns: string[] = [
   "Jumlah Peserta",
   "Proctor",
   "Tanggal",
-  "Mulai",
-  "Selesai",
+  "Jam",
   "Status"
 ];
 

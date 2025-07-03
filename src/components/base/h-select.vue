@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="flex items-center max-[768px]:block mb-1">
-      <label class="text-sm font-medium text-slate-700" :for="id">{{
+      <label :class="['font-medium text-slate-700', labelSize]" :for="id">{{
         label
       }}</label>
-      <p class="text-[10px] text-gray-500 italic ml-1" v-if="subtitle">
+      <p v-if="subtitle" :class="['text-gray-500 italic ml-1', subtitleSize]">
         {{ subtitle }}
       </p>
     </div>
@@ -76,7 +76,10 @@
         >
           <div
             v-for="item in items"
-            class="mb-2 hover:bg-gray-100 p-2 rounded text-sm cursor-pointer last:mb-0"
+            :class="[
+              'mb-2 hover:bg-gray-100 p-2 rounded cursor-pointer last:mb-0',
+              itemSize
+            ]"
             @click="selectItem(item)"
           >
             <p>{{ itemName ? item[itemName] : item }}</p>
@@ -114,6 +117,7 @@
 </template>
 
 <script setup lang="ts">
+// ... (import lainnya tetap sama)
 import { ref, computed, watchEffect, watch } from "vue";
 import { onClickOutside, useElementSize, useScroll } from "@vueuse/core";
 import {
@@ -156,6 +160,10 @@ interface PropsIF {
   border?: boolean;
   returnObject?: boolean;
   sizeValue?: string;
+  // Props baru ditambahkan di sini
+  labelSize?: string;
+  subtitleSize?: string;
+  itemSize?: string;
 }
 
 const props = withDefaults(defineProps<PropsIF>(), {
@@ -178,9 +186,14 @@ const props = withDefaults(defineProps<PropsIF>(), {
   width: "w-full",
   border: true,
   returnObject: false,
-  sizeValue: "text-sm"
+  sizeValue: "text-sm",
+  // Nilai default untuk props baru
+  labelSize: "text-sm",
+  subtitleSize: "text-[10px]",
+  itemSize: "text-sm"
 });
 
+// ... (sisa script setup tetap sama)
 const emit = defineEmits<{
   (e: "update:modelValue", value: any): void;
   (e: "close"): void;
@@ -298,6 +311,7 @@ const selectItem = (item: any) => {
 </script>
 
 <style scoped>
+/* Style tidak berubah */
 .v-enter-active,
 .v-leave-active {
   transition: opacity 0.3s, transform 0.3s;

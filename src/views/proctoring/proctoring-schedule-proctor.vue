@@ -248,7 +248,7 @@ interface AcceptSchedule {
   id: number | null;
   event_id: number | null;
   proctor_id: number | null;
-  number_of_participants: number;
+  // number_of_participants: number;
   number_of_participants_only_logged_in: number;
   number_of_participants_logged_in: number;
   // number_of_participants_not_logged_in: number;
@@ -270,7 +270,7 @@ const form = reactive<AcceptSchedule>({
   id: null,
   event_id: null,
   proctor_id: null,
-  number_of_participants: 0,
+  // number_of_participants: 0,
   number_of_participants_logged_in: 0,
   number_of_participants_only_logged_in: 0,
   // number_of_participants_not_logged_in: 0,
@@ -395,7 +395,7 @@ const acceptSchedule = (item: ReportIF) => {
     form.id = item.id ?? null;
     form.event_id = item.event.id;
     form.proctor_id = item.proctor.id;
-    form.number_of_participants = item.number_of_participants;
+    // form.number_of_participants = item.number_of_participants;
     form.number_of_participants_logged_in =
       item.number_of_participants_logged_in;
     form.number_of_participants_only_logged_in =

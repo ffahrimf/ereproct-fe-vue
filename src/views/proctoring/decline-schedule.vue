@@ -50,7 +50,7 @@ interface DeclineSchedule {
   id: number | null;
   event_id: number | null;
   proctor_id: number | null;
-  number_of_participants: number;
+  // number_of_participants: number;
   number_of_participants_logged_in: number;
   number_of_participants_only_logged_in: number;
   // number_of_participants_not_logged_in: number;
@@ -76,7 +76,7 @@ const resetForm = () => {
   form.id = null;
   form.event_id = null;
   form.proctor_id = null;
-  form.number_of_participants = 0;
+  // form.number_of_participants = 0;
   form.number_of_participants_logged_in = 0;
   form.number_of_participants_only_logged_in = 0;
   // form.number_of_participants_not_logged_in = 0;
@@ -130,7 +130,7 @@ watch(
       form.id = newVal.id;
       form.event_id = newVal.event.id;
       form.proctor_id = newVal.proctor.id;
-      form.number_of_participants = newVal.number_of_participants;
+      // form.number_of_participants = newVal.number_of_participants;
       form.number_of_participants_logged_in =
         newVal.number_of_participants_logged_in;
       form.number_of_participants_only_logged_in =

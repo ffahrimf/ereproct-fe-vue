@@ -7,6 +7,7 @@ import hNavMenu from "../components/base/h-nav-menu.vue";
 import hInput from "../components/base/h-input.vue";
 import hAvatar from "../components/base/h-avatar.vue";
 import hSearch from "../components/base/h-search.vue";
+import hSearchSelect from "../components/base/h-search-select.vue";
 import hDatePicker from "../components/base/h-date-picker.vue";
 import IconBtn from "../components/base/icon-btn.vue";
 import hArea from "../components/base/h-area.vue";
@@ -22,6 +23,7 @@ import HAccordion from "../components/base/h-accordion.vue";
 import HMenuFilter from "../components/base/h-menu-filter.vue";
 import HSelectTotalData from "../components/base/h-select-total-data.vue";
 import HSelectFilter from "../components/base/h-select-filter.vue";
+import HTimePicker from "../components/base/h-time-picker.vue";
 
 const spinner = defineAsyncComponent(
   () => import("../components/base/spinner.vue")
@@ -54,7 +56,9 @@ export const globalcomponent = (app: App): void => {
   app.component("h-input-file", hInputFile);
   app.component("h-nav-menu", hNavMenu);
   app.component("h-input", hInput);
+  app.component("h-time-picker", HTimePicker);
   app.component("h-search", hSearch);
+  app.component("h-search-select", hSearchSelect);
   app.component("h-input-password", hInputPassword);
   app.component("h-area", hArea);
   app.component("h-overlay", hOverlay);
