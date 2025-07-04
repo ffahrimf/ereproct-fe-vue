@@ -1,12 +1,8 @@
 <template>
-  <button
-    class="outline-none h-max"
-    :class="buttonClass"
-    ref="root"
-    @click="fire"
-  >
+  <div class="outline-none h-max" :class="buttonClass" ref="root">
     <slot :isOpen="isOpen"></slot>
-  </button>
+  </div>
+
   <transition>
     <div
       v-if="isOpen"
@@ -51,12 +47,6 @@ const { arrivedState } = useScroll(menuRef);
 const isOpen = ref(false);
 const isHidden = ref(false);
 
-const fire = () => {
-  if (!props.disabled) {
-    isOpen.value = !isOpen.value;
-  }
-};
-
 const props = defineProps<{
   id?: string;
   closeOnClick?: boolean;
@@ -83,17 +73,18 @@ const isCloseOnClick = () => {
   }
 };
 
-// onClickOutside(target, (_event) => {
-//   setTimeout(() => {
-//     closeMenu();
-//   });
-// });
+// BAGIAN INI DIUBAH
+const openMenu = () => {
+  isOpen.value = true;
+};
 
 const closeMenu = () => {
   isOpen.value = false;
 };
 
+// BAGIAN INI DIUBAH
 defineExpose({
+  openMenu,
   closeMenu
 });
 
@@ -139,7 +130,6 @@ watchEffect(
   { flush: "post" }
 );
 
-// untuk trigger infinte scroll
 watch(
   () => arrivedState.bottom,
   (val) => {

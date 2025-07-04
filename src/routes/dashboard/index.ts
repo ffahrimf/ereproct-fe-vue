@@ -64,6 +64,16 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
         }
       },
       {
+        path: "/report/review",
+        name: "review-report",
+        component: () => import("../../views/report/review-report.vue"),
+        meta: {
+          requiresAuth: true,
+          title: "Review Report",
+          allowedRoles: ["RESEARCH"]
+        }
+      },
+      {
         path: "/violation-master",
         name: "violation-master",
         component: () =>

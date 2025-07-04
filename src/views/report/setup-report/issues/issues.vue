@@ -5,6 +5,7 @@
         Kendala Peserta
       </p>
       <button
+        v-if="store.role === 'PROCTOR'"
         @click="dialog.create = true"
         class="p-0.5 border border-gray-200 rounded-md"
       >
@@ -19,7 +20,7 @@
     >
       <div class="flex justify-between items-center">
         <p class="font-medium">{{ item.participant.name }}</p>
-        <h-menu arrow closeOnClick>
+        <h-menu v-if="store.role === 'PROCTOR'" arrow closeOnClick>
           <template #default="">
             <h-icon name="ellipsis-horizontal" size="15"></h-icon>
           </template>
@@ -93,6 +94,7 @@ import { useToast } from "../../../../composables/use-helper";
 
 import CreateIssue from "./create-issue.vue";
 import UpdateIssue from "./update-issue.vue";
+import { mainStore } from "../../../../store";
 
 interface DialogIf {
   create: boolean;
@@ -101,6 +103,7 @@ interface DialogIf {
 
 const loading = ref<Boolean>(false);
 const data = ref<IssueIF[] | []>([]);
+const store = mainStore();
 const api = new useApi();
 
 const selectedIssue = ref<IssueIF | null>(null);

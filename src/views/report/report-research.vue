@@ -135,11 +135,23 @@
               </td>
 
               <td class="py-2 px-5">
+                <!-- Tampilkan tombol review jika statusnya REVIEW -->
                 <button
-                  @click="dialog.review = true"
+                  v-if="item.status === 'REVIEW'"
                   class="active:scale-95 text-stone-500 hover:text-primary"
                 >
-                  <h-icon name="eye" size="18" outline />
+                  <router-link :to="`/report/review?code=${item.event.code}`">
+                    <h-icon name="eye" size="18" outline
+                  /></router-link>
+                </button>
+
+                <!-- Tampilkan tombol download jika statusnya COMPLETED -->
+                <button
+                  v-else-if="item.status === 'COMPLETED'"
+                  @click="downloadReport(item)"
+                  class="active:scale-95 text-stone-500 hover:text-green-600"
+                >
+                  <h-icon name="arrow-down-tray" size="18" />
                 </button>
               </td>
             </tr>
@@ -171,13 +183,8 @@
             </div>
           </template>
         </vue-awesome-paginate>
-      </div> </template
-    ><ReviewReport
-      :pocket="pocket"
-      :dialog="dialog.review"
-      @close="dialog.review = false"
-      @refetch="getReport"
-    />
+      </div>
+    </template>
   </table-layout>
 </template>
 
@@ -189,7 +196,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useQuery } from "../../composables/use-helper";
 import { ReportIF } from "./report.interface";
 import dayjs from "dayjs";
-import ReviewReport from "./review-report.vue";
+import { downloadReportAsPdf } from "../../composables/use-pdf-generator";
 
 const SkeletonTable = defineAsyncComponent(
   () => import("../../components/skeleton-table.vue")
@@ -202,20 +209,11 @@ interface QueryIf {
   status: string;
 }
 
-interface DialogIf {
-  review: boolean;
-}
-
-const dialog = reactive<DialogIf>({
-  review: false
-});
-
 const api = new useApi();
 const router = useRouter();
 const route = useRoute();
 const loading = ref<Boolean>(false);
 const total = ref<number | null>(null);
-const pocket = ref<any>(null);
 const limits: number[] = [8, 20, 50, 100];
 const data = ref<ReportIF[] | []>([]);
 
@@ -284,6 +282,29 @@ const onFilterLimit = () => {
   getReport();
 };
 
+const downloadReport = async (item: ReportIF) => {
+  if (!item.id) {
+    console.error("ID Laporan tidak ditemukan!");
+    return;
+  }
+
+  try {
+    const res = await api.get(`report?id=${item.id}`);
+
+    const detailedData =
+      res.data.items && res.data.items.length > 0 ? res.data.items[0] : {};
+
+    const fullReportData = {
+      ...detailedData,
+      event: item.event
+    };
+
+    downloadReportAsPdf(fullReportData);
+  } catch (error) {
+    console.error("Gagal mengunduh laporan:", error);
+  }
+};
+
 const getReport = (): void => {
   loading.value = true;
 
@@ -292,7 +313,10 @@ const getReport = (): void => {
     let raw: ReportIF[] | [] = res.data.items;
 
     raw = raw.filter(
-      (item) => item.status !== "SCHEDULED" && item.status !== "DECLINED"
+      (item) =>
+        item.status !== "SCHEDULED" &&
+        item.status !== "DECLINED" &&
+        item.status !== "ON DUTY"
     );
 
     raw.sort((a, b) => {

@@ -5,6 +5,7 @@
         Indikasi Pelanggaran
       </p>
       <button
+        v-if="store.role === 'PROCTOR'"
         @click="dialog.create = true"
         class="p-0.5 border border-gray-200 rounded-md"
       >
@@ -21,7 +22,7 @@
       <div class="flex justify-between items-center">
         <p class="font-medium">{{ reportViolation.participant.name }}</p>
         <h-menu arrow closeOnClick>
-          <template #default="">
+          <template v-if="store.role === 'PROCTOR'" #default="">
             <h-icon name="ellipsis-horizontal" size="15"></h-icon>
           </template>
           <template #item>
@@ -50,12 +51,6 @@
             <span class="mr-1">:</span>
             <div class="-mt-1 flex flex-col gap-1">
               <div
-                terlihat
-                menggunakan
-                HP
-                saat
-                proses
-                tes.
                 v-for="detail in reportViolation.reportViolationDetails"
                 :key="detail.id"
                 class="flex items-start gap-1"
@@ -128,6 +123,7 @@ import UpdateViolation from "./update-violation.vue";
 import { form } from "../setup";
 import useApi from "../../../../composables/use-api";
 import { useToast } from "../../../../composables/use-helper";
+import { mainStore } from "../../../../store";
 
 interface DialogIf {
   create: boolean;
@@ -136,6 +132,7 @@ interface DialogIf {
 
 const loading = ref<boolean>(false);
 const api = new useApi();
+const store = mainStore();
 const data = ref<any[]>([]);
 const violationToEdit = ref<any | null>(null);
 

@@ -176,6 +176,7 @@
                 >Respons Peserta</label
               >
               <h-area
+                placeholder="(-) jika kosong"
                 input-size="text-xs"
                 rows="2"
                 v-model="violation.participant_violation_response"

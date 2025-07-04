@@ -112,16 +112,22 @@
       <h-icon name="arrow-path" size="16" />
     </button>
     <button
-      @click="console.log(form)"
+      @click="submitReport()"
       class="px-3 py-2 text-xs font-medium rounded-lg bg-primary text-white active:scale-95"
     >
       Submit Report
     </button>
   </div>
+  <SubmitReport
+    :pocket="pocket"
+    :dialog="dialog.submit_report"
+    @close="dialog.submit_report = false"
+    @refetch="fetchData"
+  />
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, reactive } from "vue";
 import { form, report, resetForm } from "../setup-report/setup";
 import useApi from "../../../composables/use-api";
 import { useRoute } from "vue-router";
@@ -130,12 +136,22 @@ import dayjs from "dayjs";
 import ParticipantNotLoggedIn from "./participant-not-logged-in.vue";
 import Issues from "./issues/issues.vue";
 import Violations from "./violation/violations.vue";
+import SubmitReport from "./submit-report.vue";
+
+interface DialogIf {
+  submit_report: boolean;
+}
 
 const route = useRoute();
 const code = ref((route.query.code as string) ?? "");
 const api = new useApi();
 const emit = defineEmits(["close", "refetch"]);
 const loading = ref<boolean>(false);
+const pocket = ref<any>(null);
+
+const dialog = reactive<DialogIf>({
+  submit_report: false
+});
 
 const fetchData = async (): Promise<void> => {
   loading.value = true;
@@ -166,6 +182,25 @@ const fetchData = async (): Promise<void> => {
   } finally {
     loading.value = false;
   }
+};
+
+const submitReport = () => {
+  pocket.value = {
+    path: `report/update`,
+    value: {
+      id: form.id,
+      number_of_participants_logged_in: form.number_of_participants_logged_in,
+      number_of_participants_only_logged_in:
+        form.number_of_participants_only_logged_in,
+      number_of_participants_completed: form.number_of_participants_completed,
+      number_of_participants_not_completed:
+        form.number_of_participants_not_completed,
+      status: "REVIEW",
+      note: "",
+      event: { code: report.value[0].event.code }
+    }
+  };
+  dialog.submit_report = true;
 };
 
 onMounted(() => {

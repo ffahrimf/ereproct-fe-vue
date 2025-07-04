@@ -11,7 +11,7 @@
         Peserta Tidak Login
       </p>
 
-      <h-menu-filter ref="filter">
+      <h-menu-filter v-if="store.role === 'PROCTOR'" ref="filter">
         <template #default="">
           <button
             class="p-0.5 border border-gray-200 rounded-md"
@@ -90,7 +90,11 @@
       class="mt-3 border border-gray-200 rounded-lg flex justify-between p-3"
     >
       <p class="text-xs">{{ item.participant.name }}</p>
-      <button class="mr-1" @click="deleteParticipantNotLoggedIn(item.id)">
+      <button
+        v-if="store.role === 'PROCTOR'"
+        class="mr-1"
+        @click="deleteParticipantNotLoggedIn(item.id)"
+      >
         <h-icon name="trash" size="15" color="text-red-500" />
       </button>
     </div>
@@ -104,6 +108,7 @@ import useApi from "../../../composables/use-api";
 import Skeleton from "../../../components/skeleton.vue";
 import { ParticipantIF } from "../../../interface/area.interface";
 import { form } from "./setup";
+import { mainStore } from "../../../store";
 
 interface ParticipantNotLoggedInIF {
   id?: number | null;
@@ -118,6 +123,7 @@ interface EventParticipantIF {
 
 const loadingMain = ref(false);
 const loadingFilter = ref(false);
+const store = mainStore();
 const data = ref<ParticipantNotLoggedInIF[]>([]);
 const eventParticipants = ref<EventParticipantIF[]>([]);
 const selectedIds = ref<number[]>([]);
