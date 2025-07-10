@@ -6,7 +6,7 @@ const research = ref<MenuIF[]>([
     name: "Dashboard",
     icon: "squares-2X2",
     permission: "all",
-    path: "/",
+    path: "/overview",
     sub: [],
     toggle: false
   },

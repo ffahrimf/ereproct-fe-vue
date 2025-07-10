@@ -5,7 +5,7 @@ const superadmin = ref<MenuIF[]>([
   {
     name: "Dashboard",
     icon: "squares-2X2",
-    path: "/",
+    path: "/overview",
     sub: [],
     toggle: false
   },

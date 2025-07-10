@@ -231,6 +231,6 @@ const setResponse = (res: responseLogin): void => {
   store.guid = `${res?.payload?.id}`;
   const qp = route.query.redirect ?? null;
   const redirect = Array.isArray(qp) ? qp[0] : qp;
-  router.push(redirect ? redirect : "/");
+  router.push(redirect ? redirect : "/overview");
 };
 </script>

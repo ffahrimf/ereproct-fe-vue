@@ -12,6 +12,16 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
     },
     children: [
       {
+        path: "/overview",
+        name: "overview",
+        component: () => import("../../views/overview/main-overview.vue"),
+        meta: {
+          requiresAuth: true,
+          title: "Overview",
+          allowedRoles: ["SUPERADMIN", "ASSESSMENT", "PROCTOR", "RESEARCH"]
+        }
+      },
+      {
         path: "/role",
         name: "role",
         component: () => import("../../views/role/role-list.vue"),
