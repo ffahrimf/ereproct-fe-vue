@@ -18,16 +18,11 @@ export const useLighten = (hexColor: string, factor: number): string => {
 export const useTheme = () => {
   const primary: string = "#4D4DFF";
   const primaryHover: string = "#3A3AD6";
-  const secondary: string = "#C8C0F3";
-  const word: string = "#373D52";
-  const panel: string = "#F2F4F7";
-
+  const secondary: string = "#facc15";
   const theme = {
     primary: primary,
     primaryHover: primaryHover,
     secondary: secondary,
-    word: word,
-    panel: panel,
     "primary-lighten": useLighten(primary, 0.93),
     "secondary-lighten": useLighten(secondary, 0.93)
   };

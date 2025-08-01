@@ -27,8 +27,6 @@ module.exports = {
         primary: theme.primary,
         primaryHover: theme.primaryHover,
         secondary: theme.secondary,
-        word: theme.word,
-        panel: theme.panel,
         "primary-lighten": theme["primary-lighten"],
         "secondary-lighten": theme["secondary-lighten"],
         "light-blue": "#F9F9FE",
