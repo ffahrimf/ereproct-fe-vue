@@ -5,7 +5,7 @@ import authRoutes from "./auth";
 import dashboardRoutes from "./dashboard";
 import { mainStore } from "../store";
 import { updateMetaTags } from "./meta";
-import notFoundRoutes from "./404";
+import notFoundRoutes from "./not-found";
 
 const routes: Array<RouteRecordRaw> = [
   ...authRoutes,

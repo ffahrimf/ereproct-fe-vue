@@ -1,4 +1,4 @@
-import { defineStore } from "pinia"; // define store dari pinia
+import { defineStore } from "pinia";
 import Cookies from "js-cookie";
 import { useDecrypt } from "./composables/use-helper";
 import { State } from "./interface/store.interface";

@@ -5,7 +5,7 @@ const notFoundRoutes: Array<RouteRecordRaw> = [
     path: "/:pathMatch(.*)*",
 
     name: "NotFound",
-    component: () => import("../../src/views/404.vue"),
+    component: () => import("../../src/views/not-found.vue"),
 
     meta: {
       title: "Page Not Found",

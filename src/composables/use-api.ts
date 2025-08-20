@@ -51,7 +51,7 @@ class useApi {
         ) {
           originalRequest._retry = true;
 
-          // ✅ [FIX] Ambil refresh token dari cookies
+          // Ambil refresh token dari cookies
           const refreshToken = useDecrypt(Cookies.get("hAS-rTH"));
 
           if (!refreshToken) {
@@ -63,7 +63,7 @@ class useApi {
           }
 
           try {
-            // ✅ [FIX] Kirim refresh token sebagai body mentah
+            // Kirim refresh token sebagai body mentah
             const refreshRes = await axios.post(
               `${import.meta.env.VITE_APP_ENV}/api/auth/refresh`,
               refreshToken, // Kirim string mentah, bukan objek
@@ -74,12 +74,12 @@ class useApi {
               }
             );
 
-            // ✅ [FIX] Baca struktur respons yang benar
+            //  Baca struktur respons yang benar
             const newAccessToken = refreshRes.data?.data?.token;
             const newRefreshToken = refreshRes.data?.data?.refresh_token;
 
             if (newAccessToken && newRefreshToken) {
-              // ✅ [FIX] Simpan KEDUA token yang baru
+              //  Simpan KEDUA token yang baru
               Cookies.set(
                 "hAS-aTH",
                 JSON.stringify(useEncrypt(newAccessToken)),
