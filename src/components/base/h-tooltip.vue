@@ -65,42 +65,48 @@ watchEffect(
     if (isHovered.value && root.value && target.value) {
       middleware.value = [flip(), offset(props.arrow ? 8 : 5), hide(), shift()];
       if (props.arrow && arrowEl.value) {
-        middleware.value.push(conArrow({ element: arrowEl.value }));
+        middleware.value.push(
+          conArrow({ element: arrowEl.value as HTMLElement })
+        );
       }
-      const cleanup = autoUpdate(root.value, target.value, () => {
-        if (root.value && target.value && props.position) {
-          computePosition(root.value, target.value, {
-            strategy: "absolute",
-            placement: props.position,
-            middleware: middleware.value
-          }).then(({ x, y, placement, middlewareData }) => {
-            if (target.value) {
-              target.value.style.left = `${x || 0}px`;
-              target.value.style.top = `${y || 0}px`;
+      const cleanup = autoUpdate(
+        root.value,
+        target.value as HTMLElement,
+        () => {
+          if (root.value && target.value && props.position) {
+            computePosition(root.value, target.value as HTMLElement, {
+              strategy: "absolute",
+              placement: props.position,
+              middleware: middleware.value
+            }).then(({ x, y, placement, middlewareData }) => {
+              if (target.value) {
+                target.value.style.left = `${x || 0}px`;
+                target.value.style.top = `${y || 0}px`;
 
-              isHidden.value = !!middlewareData?.hide?.referenceHidden;
+                isHidden.value = !!middlewareData?.hide?.referenceHidden;
 
-              if (middlewareData.arrow) {
-                const { x: arrowX, y: arrowY } = middlewareData.arrow;
-                const isTop = placement.indexOf("top") > -1;
-                const isLeft = placement.indexOf("left") > -1;
-                const obj: Record<string, string> = {};
-                if (arrowX) {
-                  // kalo x ada udah placement itu top/bottom
-                  obj[`${isTop ? "bottom" : "top"}`] = "-4px";
-                  obj.left = `${arrowX}px`;
-                } else {
-                  // sebaliknya
-                  obj.top = `${arrowY}px`;
-                  obj[`${isLeft ? "right" : "left"}`] = "-4px";
+                if (middlewareData.arrow) {
+                  const { x: arrowX, y: arrowY } = middlewareData.arrow;
+                  const isTop = placement.indexOf("top") > -1;
+                  const isLeft = placement.indexOf("left") > -1;
+                  const obj: Record<string, string> = {};
+                  if (arrowX) {
+                    // kalo x ada udah placement itu top/bottom
+                    obj[`${isTop ? "bottom" : "top"}`] = "-4px";
+                    obj.left = `${arrowX}px`;
+                  } else {
+                    // sebaliknya
+                    obj.top = `${arrowY}px`;
+                    obj[`${isLeft ? "right" : "left"}`] = "-4px";
+                  }
+
+                  Object.assign(arrowEl.value!.style, obj);
                 }
-
-                Object.assign(arrowEl.value!.style, obj);
               }
-            }
-          });
+            });
+          }
         }
-      });
+      );
 
       onCleanup(cleanup);
     }

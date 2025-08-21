@@ -140,7 +140,7 @@ const onOpen = (val: string | null, type: "hour" | "minute") => {
 const onChange = (
   val: string,
   type: "hour" | "minute",
-  isDisabled: boolean,
+  isDisabled: boolean
 ) => {
   if (!isDisabled) {
     const newHour =

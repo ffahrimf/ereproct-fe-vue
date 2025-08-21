@@ -131,10 +131,12 @@ import {
 import ProgressLinear from "./progress-linear.vue";
 
 const target = ref<HTMLElement | null>(null);
-const root = ref<HTMLElement | null>(null);
+import type { Ref } from "vue";
+
+const root = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 const parentWidth = useElementSize(root);
 
-const menuRef = ref<HTMLElement | null>(null);
+const menuRef: Ref<HTMLElement | null> = ref(null);
 const { arrivedState } = useScroll(menuRef);
 const isOpen = ref(false);
 const isHidden = ref(false);
@@ -244,7 +246,7 @@ const isCloseOnClick = () => {
   }
 };
 
-onClickOutside(target, () => {
+onClickOutside(root, () => {
   setTimeout(() => {
     closeMenu();
   });
@@ -271,21 +273,25 @@ watch(
 watchEffect(
   (onCleanup) => {
     if (isOpen.value && root.value && target.value) {
-      const cleanup = autoUpdate(root.value, target.value, () => {
-        computePosition(root.value!, target.value!, {
-          strategy: "absolute",
-          placement: "bottom-start",
-          middleware: [flip(), shift(), offset(5), hide()]
-        }).then(({ x, y, middlewareData }) => {
-          if (target.value) {
-            target.value.style.left = `${x || 0}px`;
-            target.value.style.top = `${y || 0}px`;
-            if (middlewareData.hide) {
-              isHidden.value = middlewareData.hide.referenceHidden ?? false;
+      const cleanup = autoUpdate(
+        root.value,
+        target.value as HTMLElement,
+        () => {
+          computePosition(root.value!, target.value! as HTMLElement, {
+            strategy: "absolute",
+            placement: "bottom-start",
+            middleware: [flip(), shift(), offset(5), hide()]
+          }).then(({ x, y, middlewareData }) => {
+            if (target.value) {
+              target.value.style.left = `${x || 0}px`;
+              target.value.style.top = `${y || 0}px`;
+              if (middlewareData.hide) {
+                isHidden.value = middlewareData.hide.referenceHidden ?? false;
+              }
             }
-          }
-        });
-      });
+          });
+        }
+      );
 
       onCleanup(cleanup);
     }

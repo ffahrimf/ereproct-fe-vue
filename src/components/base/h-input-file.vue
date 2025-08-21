@@ -13,7 +13,7 @@
         name="paperclip"
         size="20"
         class="-rotate-45 text-gray-500 absolute top-2.5 left-2 z-2"
-        @click="!disabled ? $refs.file.click() : () => {}"
+        @click="!disabled ? fileInputClick() : () => {}"
       />
       <mdicon
         v-if="modelValue"
@@ -26,7 +26,7 @@
         ref="input"
         class="input__form"
         :value="filename"
-        @click="$refs.file.click()"
+        @click="fileInputClick()"
         :id="id"
         :type="type"
         readonly
@@ -36,7 +36,7 @@
     </div>
     <input
       type="file"
-      ref="file"
+      ref="fileRef"
       :accept="rule"
       @change="selectFile($event)"
       class="hidden"
@@ -48,7 +48,7 @@
 import { ref, watch } from "vue";
 
 defineOptions({
-  name: "InputFileComponent",
+  name: "InputFileComponent"
 });
 
 const props = defineProps<{
@@ -68,6 +68,13 @@ const emit = defineEmits<{
 }>();
 
 const filename = ref<string>("");
+const fileRef = ref<HTMLInputElement | null>(null);
+
+const fileInputClick = () => {
+  if (!props.disabled && fileRef.value) {
+    fileRef.value.click();
+  }
+};
 
 const selectFile = (e: Event) => {
   const target = e.target as HTMLInputElement;
@@ -90,11 +97,11 @@ watch(
     if (!val) {
       filename.value = "";
     }
-  },
+  }
 );
 
 defineExpose({
-  resetFile,
+  resetFile
 });
 </script>
 

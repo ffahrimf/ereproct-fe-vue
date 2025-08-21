@@ -46,10 +46,12 @@ import ProgressLinear from "./progress-linear.vue";
 
 const arrowEl = ref<HTMLElement | null>(null);
 const target = ref<HTMLElement | null>(null);
-const root = ref<HTMLElement | null>(null);
+import type { Ref } from "vue";
+
+const root = ref<HTMLElement | null>(null) as Ref<HTMLElement | null>;
 const parentWidth = useElementSize(root);
 
-const menuRef = ref<HTMLElement | null>(null);
+const menuRef: Ref<HTMLElement | null> = ref(null);
 const { arrivedState } = useScroll(menuRef);
 const isOpen = ref(false);
 const isHidden = ref(false);
@@ -86,7 +88,7 @@ const isCloseOnClick = () => {
   }
 };
 
-onClickOutside(target, (_event) => {
+onClickOutside(root, (_event) => {
   setTimeout(() => {
     closeMenu();
   });
@@ -107,34 +109,42 @@ watchEffect(
     if (isOpen.value && root.value && target.value) {
       middleware.value = [flip(), shift(), offset(props.arrow ? 8 : 5), hide()];
       if (props.arrow && arrowEl.value) {
-        middleware.value.splice(2, 0, conArrow({ element: arrowEl.value }));
+        middleware.value.splice(
+          2,
+          0,
+          conArrow({ element: arrowEl.value as HTMLElement })
+        );
       }
-      const cleanup = autoUpdate(root.value, target.value, () => {
-        computePosition(root.value!, target.value!, {
-          strategy: "absolute",
-          placement: "bottom-start",
-          middleware: middleware.value
-        }).then(({ x, y, placement, middlewareData }) => {
-          if (target.value) {
-            target.value.style.left = `${x || 0}px`;
-            target.value.style.top = `${y || 0}px`;
-            if (middlewareData.hide) {
-              isHidden.value = middlewareData.hide.referenceHidden ?? false;
-            }
+      const cleanup = autoUpdate(
+        root.value,
+        target.value as HTMLElement,
+        () => {
+          computePosition(root.value!, target.value! as HTMLElement, {
+            strategy: "absolute",
+            placement: "bottom-start",
+            middleware: middleware.value
+          }).then(({ x, y, placement, middlewareData }) => {
+            if (target.value) {
+              target.value.style.left = `${x || 0}px`;
+              target.value.style.top = `${y || 0}px`;
+              if (middlewareData.hide) {
+                isHidden.value = middlewareData.hide.referenceHidden ?? false;
+              }
 
-            if (middlewareData.arrow) {
-              const { x } = middlewareData.arrow;
-              const isTop = placement.indexOf("top") > -1;
-              if (arrowEl.value) {
-                Object.assign(arrowEl.value.style, {
-                  [`${isTop ? "bottom" : "top"}`]: "-4px",
-                  left: x != null ? `${x}px` : ""
-                });
+              if (middlewareData.arrow) {
+                const { x } = middlewareData.arrow;
+                const isTop = placement.indexOf("top") > -1;
+                if (arrowEl.value) {
+                  Object.assign(arrowEl.value.style, {
+                    [`${isTop ? "bottom" : "top"}`]: "-4px",
+                    left: x != null ? `${x}px` : ""
+                  });
+                }
               }
             }
-          }
-        });
-      });
+          });
+        }
+      );
 
       onCleanup(cleanup);
     }
