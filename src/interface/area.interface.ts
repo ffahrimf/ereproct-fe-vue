@@ -15,7 +15,7 @@ export interface CityIF {
 }
 
 export interface ClientIF {
-  id: string;
+  id: number;
   uuid: string;
   logo: string;
   code: string;

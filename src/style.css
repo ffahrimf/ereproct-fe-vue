@@ -28,12 +28,12 @@
 }
 
 @font-face {
-  font-family: 'Axiforma-Bold';
+  font-family: "Axiforma-Bold";
   src: url(/src/assets/fonts/Kastelov\ \ Axiforma\ Bold.otf);
 }
 
 @font-face {
-  font-family: 'Axiforma-XtraBold';
+  font-family: "Axiforma-XtraBold";
   src: url(/src/assets/fonts/Kastelov\ \ Axiforma\ ExtraBold.otf);
 }
 
@@ -101,7 +101,6 @@
   background-attachment: fixed;
 }
 
-
 .accordion-enter-active,
 .accordion-leave-active {
   transition: all 0.3s ease;
@@ -114,11 +113,9 @@
 }
 
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

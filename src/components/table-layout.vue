@@ -3,6 +3,9 @@
     <div class="absolute top-0 h-[100px] pt-8 ml-10">
       <slot name="header-searchbar"></slot>
     </div>
+    <div class="px-10">
+      <slot name="header-banner"></slot>
+    </div>
     <div class="px-10 flex mb-3 items-center justify-between">
       <p class="font-semibold text-xl">{{ title }}</p>
       <slot name="header-action"></slot>

@@ -25,6 +25,7 @@ import HSelectTotalData from "../components/base/h-select-total-data.vue";
 import HSelectFilter from "../components/base/h-select-filter.vue";
 import HTimePicker from "../components/base/h-time-picker.vue";
 import HBigBtn from "../components/base/h-big-btn.vue";
+import HBanner from "../components/base/h-banner.vue";
 
 const spinner = defineAsyncComponent(
   () => import("../components/base/spinner.vue")
@@ -73,4 +74,5 @@ export const globalcomponent = (app: App): void => {
   app.component("h-icon", hIcon);
   app.component("h-counter-input", hCounterInput);
   app.component("h-big-btn", HBigBtn);
+  app.component("h-banner", HBanner);
 };

@@ -9,6 +9,19 @@
         class="w-[350px] xl:w-[450px]"
       ></h-search>
     </template>
+    <template #header-banner>
+      <h-banner type="info" class="mb-6">
+        <template #title
+          >Data event pada tabel ini diambil secara otomatis dari aplikasi
+          eksternal</template
+        >
+
+        <p>
+          Namun, Anda dapat membuat data event tiruan (dummy) untuk keperluan
+          pengujian.
+        </p>
+      </h-banner>
+    </template>
     <template #header-action>
       <div class="flex items-center space-x-7">
         <h-menu arrow closeOnClick>
@@ -45,6 +58,13 @@
             @change="onFilterLimit"
           ></h-select-total-data>
         </div>
+        <h-btn
+          @click="dialog.create = true"
+          class="rounded-md px-3 py-2 flex items-center gap-3"
+        >
+          <h-icon name="plus"></h-icon>
+          <p class="">Tambah Event</p>
+        </h-btn>
       </div>
     </template>
     <div>
@@ -211,6 +231,12 @@
       @close="dialog.unassign = false"
       @refetch="getEvent"
     />
+    <CreateEvent
+      :pocket="pocket"
+      :dialog="dialog.create"
+      @close="dialog.create = false"
+      @refetch="getEvent"
+    />
   </table-layout>
 </template>
 
@@ -224,6 +250,7 @@ import { EventIF } from "./event.interface";
 import dayjs from "dayjs";
 import UnassignedProctoring from "./unassigned-proctoring.vue";
 import AssignProctoring from "./assign-proctoring.vue";
+import CreateEvent from "./create-event.vue";
 
 const SkeletonTable = defineAsyncComponent(
   () => import("../../components/skeleton-table.vue")
@@ -239,6 +266,7 @@ interface QueryIf {
 interface DialogIf {
   unassign: boolean;
   assign: boolean;
+  create: boolean;
 }
 
 const api = new useApi();
@@ -257,6 +285,7 @@ const selectedStatusLabel = computed(() => {
 });
 
 const dialog = reactive<DialogIf>({
+  create: false,
   unassign: false,
   assign: false
 });
