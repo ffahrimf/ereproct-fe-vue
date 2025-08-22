@@ -6,7 +6,7 @@ const assessment = ref<MenuIF[]>([
     name: "Dashboard",
     icon: "squares-2X2",
     permission: "all",
-    path: "/overview",
+    path: "/",
     sub: [],
     toggle: false
   },

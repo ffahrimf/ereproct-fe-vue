@@ -12,7 +12,7 @@ const dashboardRoutes: Array<RouteRecordRaw> = [
     },
     children: [
       {
-        path: "/overview",
+        path: "/",
         name: "overview",
         component: () => import("../../views/overview/main-overview.vue"),
         meta: {

@@ -48,7 +48,10 @@ const fetchProctoringStats = async () => {
       completedCount.value = completedRes.data.items.length;
     }
 
-    totalProctorCount.value = 5;
+    const totalProctor = await api.get("proctor?status=ACTIVE");
+    if (totalProctor.data && totalProctor.data.items) {
+      totalProctorCount.value = totalProctor.data.items.length;
+    }
   } catch (error) {
     console.error("Gagal mengambil data statistik proctoring:", error);
   }
