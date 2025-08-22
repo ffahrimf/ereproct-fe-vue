@@ -1,16 +1,12 @@
 <template>
   <div
-    style="
-      background-image: url(/src/assets/img/login-background.svg);
-      background-size: cover;
-    "
-    class="w-full min-h-screen flex items-center justify-center"
+    class="w-full min-h-screen flex items-center justify-center my-background-div"
   >
     <div
       class="w-[380px] px-10 py-12 rounded-3xl shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] bg-white flex items-center flex-col gap-3"
     >
       <div class="text-center space-y-2.5">
-        <p class="text-xl font-axiforma-xtrabold">User Login</p>
+        <p class="text-xl font-bold font-inter">User Login</p>
 
         <p class="text-[13px]">
           Hey, Enter your details to get sign in <br />to your account
@@ -234,3 +230,10 @@ const setResponse = (res: responseLogin): void => {
   router.push(redirect ? redirect : "/overview");
 };
 </script>
+
+<style scoped>
+.my-background-div {
+  background-image: url("../../assets/img/login-background.svg");
+  background-size: cover;
+}
+</style>
