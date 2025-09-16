@@ -33,7 +33,8 @@
     "vue-awesome-paginate": "^1.2.0",
     "vue-collapsed": "^1.3.4",
     "vue-i18n": "^10.0.4",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue3-recaptcha-v2": "^2.1.0"
   },
   "devDependencies": {
     "@types/vue-i18n": "^7.0.0",
@@ -45,6 +46,7 @@
     "tailwindcss": "^3.4.14",
     "typescript": "^5.5.3",
     "vite": "^5.4.10",
+    "vue-recaptcha-v3": "^2.0.1",
     "vue-tsc": "^2.1.6"
   }
 }
